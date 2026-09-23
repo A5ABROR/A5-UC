@@ -1,1 +1,872 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A5 UC</title>
 
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #111318;
+      --muted: #747983;
+      --border: #e5e7eb;
+      --accent: #111318;
+      --accent-text: #ffffff;
+      --nav: rgba(255,255,255,.94);
+    }
+
+    body.dark {
+      --bg: #0c0d0f;
+      --card: #15171a;
+      --text: #f5f5f5;
+      --muted: #92969f;
+      --border: #292c31;
+      --accent: #f5f5f5;
+      --accent-text: #111318;
+      --nav: rgba(15,16,18,.96);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: .25s;
+      padding-bottom: 90px;
+    }
+
+    /* LOADING */
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: hideLoading .5s ease 1.8s forwards;
+    }
+
+    .logo {
+      width: 92px;
+      height: 92px;
+      border-radius: 26px;
+      background: var(--accent);
+      color: var(--accent-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      animation: logoIn .8s ease;
+    }
+
+    .loading-title {
+      margin-top: 18px;
+      font-size: 24px;
+      font-weight: 800;
+      animation: fadeIn .8s ease;
+    }
+
+    .loading-sub {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @keyframes logoIn {
+      from {
+        opacity: 0;
+        transform: scale(.75);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes hideLoading {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* HEADER */
+
+    header {
+      padding: 24px 18px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .mode {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 13px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    /* MAIN */
+
+    main {
+      padding: 10px 16px;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .welcome {
+      margin: 12px 2px 20px;
+    }
+
+    .welcome h1 {
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      margin-top: 7px;
+      font-size: 14px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: var(--accent);
+      color: var(--accent-text);
+      border-radius: 24px;
+      padding: 25px;
+      min-height: 185px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: 25px;
+      max-width: 220px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      opacity: .65;
+      font-size: 13px;
+      max-width: 230px;
+      line-height: 1.5;
+    }
+
+    .uc-symbol {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 90px;
+      height: 90px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    /* SECTION */
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 22px 2px 12px;
+    }
+
+    .section-title h3 {
+      font-size: 18px;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* UC CARDS */
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .package {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 17px;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .package:active {
+      transform: scale(.97);
+    }
+
+    .package-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 13px;
+    }
+
+    .package strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    .package small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .package-price {
+      margin-top: 13px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* PAGES */
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: pageIn .25s ease;
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .empty {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .empty-icon {
+      font-size: 42px;
+      margin-bottom: 14px;
+    }
+
+    .empty h3 {
+      font-size: 18px;
+    }
+
+    .empty p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    /* WALLET */
+
+    .balance {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 23px;
+      margin-top: 18px;
+    }
+
+    .balance-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .balance-number {
+      font-size: 30px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .add-money {
+      margin-top: 18px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 15px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* PROFILE */
+
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      margin-top: 18px;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: var(--accent);
+      color: var(--accent-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .profile-row {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .profile-row:last-child {
+      border-bottom: 0;
+    }
+
+    .profile-row span:first-child {
+      color: var(--muted);
+    }
+
+    /* NAV */
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      max-width: 630px;
+      margin: auto;
+      height: 67px;
+      background: var(--nav);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 21px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      z-index: 100;
+      box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+    }
+
+    .nav-btn.active {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 300;
+      display: none;
+      align-items: flex-end;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 650px;
+      margin: auto auto 0;
+      background: var(--card);
+      border-radius: 27px 27px 0 0;
+      padding: 25px 20px 30px;
+      animation: modalIn .25s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-box h2 {
+      font-size: 21px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      margin-top: 7px;
+      font-size: 13px;
+    }
+
+    .input {
+      width: 100%;
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 15px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .confirm {
+      width: 100%;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 14px;
+      padding: 15px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-weight: 700;
+    }
+
+    .close {
+      width: 100%;
+      margin-top: 9px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    @media(max-width:360px) {
+      .packages {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="logo">A5</div>
+    <div class="loading-title">A5 UC</div>
+    <div class="loading-sub">PUBG Mobile UC Shop</div>
+  </div>
+
+  <header>
+    <div class="brand">A5 UC</div>
+    <button class="mode" onclick="toggleTheme()" id="modeBtn">☾</button>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+
+      <div class="welcome">
+        <h1>Bosh sahifa</h1>
+        <p>Kerakli UC paketini tanlang.</p>
+      </div>
+
+      <div class="hero">
+        <h2>PUBG Mobile UC</h2>
+        <p>Tez va qulay tarzda UC buyurtma qiling.</p>
+        <div class="uc-symbol">UC</div>
+      </div>
+
+      <div class="section-title">
+        <h3>UC sotib olish</h3>
+        <span>Tanlang</span>
+      </div>
+
+      <div class="packages">
+
+        <div class="package" onclick="openOrder(60,11500)">
+          <div class="package-icon">UC</div>
+          <strong>60 UC</strong>
+          <small>PUBG Mobile</small>
+          <div class="package-price">11 500 so‘m</div>
+        </div>
+
+        <div class="package" onclick="openOrder(325,57500)">
+          <div class="package-icon">UC</div>
+          <strong>325 UC</strong>
+          <small>PUBG Mobile</small>
+          <div class="package-price">57 500 so‘m</div>
+        </div>
+
+        <div class="package" onclick="openOrder(660,115000)">
+          <div class="package-icon">UC</div>
+          <strong>660 UC</strong>
+          <small>PUBG Mobile</small>
+          <div class="package-price">115 000 so‘m</div>
+        </div>
+
+        <div class="package">
+          <div class="package-icon">+</div>
+          <strong>Boshqa</strong>
+          <small>Keyin qo‘shiladi</small>
+          <div class="package-price">Admin orqali</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="orders" class="page">
+
+      <div class="welcome">
+        <h1>Buyurtmalarim</h1>
+        <p>Barcha buyurtmalaringiz shu yerda.</p>
+      </div>
+
+      <div class="empty">
+        <div class="empty-icon">📦</div>
+        <h3>Buyurtmalar yo‘q</h3>
+        <p>Siz hali hech qanday UC buyurtma qilmagansiz.</p>
+      </div>
+
+    </section>
+
+    <!-- WALLET -->
+    <section id="wallet" class="page">
+
+      <div class="welcome">
+        <h1>Hamyon</h1>
+        <p>Hisobingizdagi balans.</p>
+      </div>
+
+      <div class="balance">
+        <div class="balance-label">Joriy balans</div>
+        <div class="balance-number">0 so‘m</div>
+
+        <button class="add-money" onclick="openWallet()">
+          + Balans to‘ldirish
+        </button>
+      </div>
+
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+
+      <div class="welcome">
+        <h1>Profil</h1>
+        <p>Hisob ma'lumotlaringiz.</p>
+      </div>
+
+      <div class="profile-card">
+
+        <div class="avatar">A5</div>
+
+        <div class="profile-row">
+          <span>Ism</span>
+          <strong id="userName">Foydalanuvchi</strong>
+        </div>
+
+        <div class="profile-row">
+          <span>Telegram ID</span>
+          <strong id="userId">—</strong>
+        </div>
+
+        <div class="profile-row">
+          <span>Buyurtmalar</span>
+          <strong>0</strong>
+        </div>
+
+        <div class="profile-row">
+          <span>Balans</span>
+          <strong>0 so‘m</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+
+  <nav class="bottom-nav">
+
+    <button class="nav-btn active" onclick="showPage('home',this)">
+      <span class="nav-icon">⌂</span>
+      Bosh sahifa
+    </button>
+
+    <button class="nav-btn" onclick="showPage('orders',this)">
+      <span class="nav-icon">▣</span>
+      Buyurtmalarim
+    </button>
+
+    <button class="nav-btn" onclick="showPage('wallet',this)">
+      <span class="nav-icon">₿</span>
+      Hamyon
+    </button>
+
+    <button class="nav-btn" onclick="showPage('profile',this)">
+      <span class="nav-icon">●</span>
+      Profil
+    </button>
+
+  </nav>
+
+  <!-- ORDER MODAL -->
+
+  <div class="modal" id="orderModal">
+
+    <div class="modal-box">
+
+      <h2>UC buyurtma</h2>
+      <p id="selectedPackage">60 UC — 11 500 so‘m</p>
+
+      <input
+        class="input"
+        id="playerId"
+        type="number"
+        placeholder="PUBG Player ID"
+      >
+
+      <button class="confirm" onclick="submitOrder()">
+        Davom etish
+      </button>
+
+      <button class="close" onclick="closeModal('orderModal')">
+        Bekor qilish
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- WALLET MODAL -->
+
+  <div class="modal" id="walletModal">
+
+    <div class="modal-box">
+
+      <h2>Balans to‘ldirish</h2>
+
+      <p>
+        Bank kartangizga pul o'tkazib,
+        to‘lov ma'lumotlarini yuborasiz.
+      </p>
+
+      <input
+        class="input"
+        type="number"
+        placeholder="To‘lov summasi"
+        id="paymentAmount"
+      >
+
+      <button class="confirm" onclick="submitPayment()">
+        To‘lov so‘rovini yuborish
+      </button>
+
+      <button class="close" onclick="closeModal('walletModal')">
+        Bekor qilish
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Telegram Web App
+    const tg = window.Telegram?.WebApp;
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
+
+      const user = tg.initDataUnsafe?.user;
+
+      if (user) {
+        document.getElementById("userName").textContent =
+          user.first_name || "Foydalanuvchi";
+
+        document.getElementById("userId").textContent =
+          user.id || "—";
+      }
+    }
+
+    // Theme
+    function toggleTheme() {
+
+      document.body.classList.toggle("dark");
+
+      const dark =
+        document.body.classList.contains("dark");
+
+      document.getElementById("modeBtn").textContent =
+        dark ? "☀" : "☾";
+
+      localStorage.setItem(
+        "a5_theme",
+        dark ? "dark" : "light"
+      );
+    }
+
+    if (localStorage.getItem("a5_theme") === "dark") {
+      document.body.classList.add("dark");
+      document.getElementById("modeBtn").textContent = "☀";
+    }
+
+    // Pages
+    function showPage(page, button) {
+
+      document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+      document.getElementById(page)
+        .classList.add("active");
+
+      document.querySelectorAll(".nav-btn")
+        .forEach(b => b.classList.remove("active"));
+
+      button.classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    // UC order
+    let selectedUC = 0;
+    let selectedPrice = 0;
+
+    function openOrder(uc, price) {
+
+      selectedUC = uc;
+      selectedPrice = price;
+
+      document.getElementById("selectedPackage")
+        .textContent =
+        uc + " UC — " +
+        price.toLocaleString("uz-UZ") +
+        " so‘m";
+
+      document.getElementById("orderModal")
+        .classList.add("show");
+    }
+
+    function submitOrder() {
+
+      const id =
+        document.getElementById("playerId").value;
+
+      if (!id) {
+        alert("PUBG Player ID kiriting.");
+        return;
+      }
+
+      alert(
+        "Buyurtma tizimi backend bilan ulangandan keyin ishlaydi."
+      );
+    }
+
+    // Wallet
+    function openWallet() {
+      document.getElementById("walletModal")
+        .classList.add("show");
+    }
+
+    function submitPayment() {
+
+      const amount =
+        document.getElementById("paymentAmount").value;
+
+      if (!amount) {
+        alert("Summani kiriting.");
+        return;
+      }
+
+      alert(
+        "To‘lov so‘rovi backend bilan ulangandan keyin adminga yuboriladi."
+      );
+    }
+
+    function closeModal(id) {
+      document.getElementById(id)
+        .classList.remove("show");
+    }
+
+  </script>
+
+</body>
+</html>
