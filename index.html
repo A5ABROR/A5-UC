@@ -2,8 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>A5 UC</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -17,304 +16,331 @@
 }
 
 :root{
-  --bg:#0d0f12;
-  --bg2:#14171b;
-  --card:#171b20;
-  --card2:#1d2127;
-  --border:#30363e;
-
-  --text:#f5f7fa;
-  --muted:#9299a4;
-
-  --bronze:#d18b3f;
-  --bronze2:#f0b86b;
-
-  --blue:#2bbcff;
-  --blue2:#1265ff;
-
-  --green:#13d58b;
-
-  --shadow:0 12px 35px rgba(0,0,0,.35);
-}
-
-body.light{
-  --bg:#eef1f4;
-  --bg2:#e4e8ed;
-  --card:#ffffff;
-  --card2:#f3f5f7;
-  --border:#d6dbe1;
-  --text:#17191c;
-  --muted:#6f7680;
-  --shadow:0 10px 30px rgba(30,40,50,.12);
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
+  --bg:#101114;
+  --bg2:#17191e;
+  --card:#191c21;
+  --card2:#20242a;
+  --text:#f5f5f5;
+  --muted:#9298a2;
+  --bronze:#d99643;
+  --bronze2:#b66c25;
+  --line:#30343b;
+  --green:#22c98b;
 }
 
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 10% 0%,rgba(30,111,180,.14),transparent 30%),
-    radial-gradient(circle at 90% 15%,rgba(210,137,59,.09),transparent 28%),
-    var(--bg);
+    radial-gradient(circle at 80% 10%,rgba(217,150,67,.13),transparent 25%),
+    radial-gradient(circle at 10% 45%,rgba(0,120,180,.10),transparent 25%),
+    linear-gradient(180deg,#0d0e11,#15171b 55%,#0b0c0e);
   color:var(--text);
-  overflow-x:hidden;
-  transition:.3s;
-}
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-  border:0;
-}
-
-.app{
-  width:100%;
-  max-width:650px;
-  margin:auto;
   min-height:100vh;
   padding-bottom:100px;
 }
 
+button,input{
+  font:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
 /* HEADER */
 
-.header{
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  height:66px;
-
+.top{
+  height:72px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:0 18px;
-
-  background:rgba(13,15,18,.88);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 22px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:rgba(12,13,16,.92);
+  backdrop-filter:blur(18px);
+  position:sticky;
+  top:0;
+  z-index:50;
 }
 
-body.light .header{
-  background:rgba(255,255,255,.88);
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
 
 .logo{
+  width:46px;
+  height:46px;
+  border-radius:14px;
   display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logoBox{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-
-  display:flex;
-  align-items:center;
   justify-content:center;
-
-  font-size:17px;
-  font-weight:900;
-
-  color:#17191c;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff 0%,
-      #cfd3d8 28%,
-      #676d75 54%,
-      #f5f6f7 78%,
-      #8d9298
-    );
-
-  box-shadow:
-    inset 2px 2px 3px rgba(255,255,255,.9),
-    inset -3px -3px 5px rgba(0,0,0,.45),
-    0 5px 16px rgba(0,0,0,.3);
-}
-
-.logoText{
+  align-items:center;
+  color:#202226;
   font-weight:900;
   font-size:19px;
+  background:
+    linear-gradient(145deg,#ffffff,#bfc3c8 55%,#73777d);
+  box-shadow:
+    inset 0 1px 2px white,
+    0 5px 20px rgba(0,0,0,.45);
 }
 
-.logoText span{
-  color:var(--bronze2);
+.brand{
+  font-size:21px;
+  font-weight:800;
+}
+
+.brand span{
+  color:var(--bronze);
 }
 
 .theme{
-  width:40px;
-  height:40px;
+  width:45px;
+  height:45px;
   border-radius:50%;
-
-  color:var(--text);
-  background:var(--card2);
-  border:1px solid var(--border);
-
-  font-size:18px;
+  color:white;
+  background:#1d2026;
+  border:1px solid #353941;
+  font-size:20px;
 }
 
-/* PAGE */
+/* CONTENT */
 
-.page{
-  display:none;
-  padding:16px;
-  animation:appear .25s ease;
-}
-
-.page.active{
-  display:block;
-}
-
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:22px 18px;
 }
 
 /* HERO */
 
 .hero{
-  height:185px;
   position:relative;
   overflow:hidden;
-
-  border-radius:23px;
-
-  border:1px solid #3b4149;
-
+  min-height:210px;
+  border-radius:28px;
+  border:1px solid #343943;
   background:
-    radial-gradient(circle at 80% 20%,rgba(46,173,255,.35),transparent 27%),
-    radial-gradient(circle at 20% 80%,rgba(210,137,59,.25),transparent 30%),
-    linear-gradient(135deg,#0b1117,#1b222b 55%,#0e141a);
-
-  box-shadow:var(--shadow);
+    radial-gradient(circle at 90% 20%,rgba(35,143,205,.38),transparent 32%),
+    radial-gradient(circle at 15% 90%,rgba(217,150,67,.20),transparent 30%),
+    linear-gradient(135deg,#101820,#171b21);
+  padding:30px;
+  box-shadow:0 18px 45px rgba(0,0,0,.25);
 }
 
-.heroGlow{
-  position:absolute;
-  width:230px;
-  height:230px;
-  right:-100px;
-  top:-100px;
-
-  border-radius:50%;
-
-  background:radial-gradient(
-    circle,
-    rgba(62,191,255,.35),
-    transparent 65%
-  );
-}
-
-.heroContent{
-  position:absolute;
-  left:22px;
-  top:30px;
-  z-index:2;
-}
-
-.heroMini{
-  font-size:11px;
-  letter-spacing:2px;
-  color:var(--bronze2);
+.hero small{
+  color:#e0a65c;
   font-weight:800;
+  letter-spacing:3px;
 }
 
 .hero h1{
-  font-size:36px;
-  margin-top:7px;
-  letter-spacing:-1px;
+  margin-top:14px;
+  font-size:43px;
+  letter-spacing:-2px;
 }
 
 .hero h1 span{
-  color:var(--bronze2);
+  color:#e0a65c;
 }
 
 .hero p{
-  margin-top:8px;
-  color:#aeb5be;
-  font-size:13px;
+  margin-top:10px;
+  color:#a6abb4;
+  font-size:15px;
 }
 
-.heroCoin{
+.hero-coin{
   position:absolute;
-  right:22px;
-  bottom:18px;
-
-  width:105px;
-  height:105px;
-
+  right:24px;
+  bottom:22px;
+  width:120px;
+  height:120px;
   border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:23px;
-  font-weight:900;
-
-  color:#30343a;
-
   background:
-    radial-gradient(
-      circle at 30% 25%,
-      #fff,
-      #d8dce0 25%,
-      #888e95 48%,
-      #f0f2f3 65%,
-      #70767d
-    );
-
-  box-shadow:
-    inset 5px 5px 10px rgba(255,255,255,.8),
-    inset -8px -8px 14px rgba(0,0,0,.55),
-    0 15px 35px rgba(0,0,0,.45);
-}
-
-.heroCoin:after{
-  content:"A5";
-  position:absolute;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-
+    radial-gradient(circle,#e9ebed 0 35%,#8b9096 36% 39%,#dce0e3 40% 63%,#73777c 64% 67%,#e6e8e9 68%);
   display:flex;
   align-items:center;
   justify-content:center;
-
-  border:2px solid #646a70;
+  color:#272b30;
+  font-weight:900;
+  font-size:22px;
+  box-shadow:0 10px 35px rgba(0,0,0,.45);
 }
 
 /* SECTION */
 
-.sectionHead{
+.section-title{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  margin:22px 3px 12px;
+  margin:30px 4px 16px;
 }
 
-.sectionHead h2{
-  font-size:19px;
+.section-title h2{
+  font-size:25px;
 }
 
-.sectionHead span{
-  color:var(--muted);
-  font-size:12px;
+.section-title span{
+  color:#858a93;
+}
+
+/* USER CHECK */
+
+.check-card{
+  background:linear-gradient(145deg,#1b1e23,#15171b);
+  border:1px solid #363a42;
+  border-radius:25px;
+  padding:22px;
+  margin-top:25px;
+}
+
+.check-head{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.user-icon{
+  width:55px;
+  height:55px;
+  border-radius:17px;
+  border:1px solid #353941;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:27px;
+}
+
+.check-head h3{
+  font-size:20px;
+}
+
+.check-head p{
+  color:#8e949d;
+  margin-top:4px;
+}
+
+.input-row{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+
+.input{
+  flex:1;
+  min-width:0;
+  background:#101216;
+  color:white;
+  border:1px solid #3a3e46;
+  border-radius:18px;
+  padding:17px;
+  outline:none;
+}
+
+.input:focus{
+  border-color:var(--bronze);
+  box-shadow:0 0 0 3px rgba(217,150,67,.1);
+}
+
+.check-btn,
+.buy-btn{
+  color:white;
+  background:linear-gradient(145deg,#edb15d,#b96e28);
+  border-radius:17px;
+  padding:0 20px;
+  font-weight:800;
+  box-shadow:0 7px 20px rgba(190,111,39,.22);
+}
+
+.player{
+  display:none;
+  margin-top:15px;
+  padding:14px;
+  border-radius:18px;
+  border:1px solid rgba(34,201,139,.45);
+  background:rgba(34,201,139,.08);
+}
+
+.player.active{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.player-name{
+  font-weight:800;
+}
+
+.player-name small{
+  display:block;
+  color:var(--green);
+  margin-top:4px;
+}
+
+.change{
+  color:#a7abb1;
+}
+
+/* PACKAGES */
+
+.packages{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.package{
+  overflow:hidden;
+  background:linear-gradient(160deg,#191c22,#111317);
+  border:1px solid #353a43;
+  border-radius:23px;
+  position:relative;
+  transition:.2s;
+}
+
+.package:active{
+  transform:scale(.97);
+}
+
+.uc-img{
+  height:145px;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(25,111,157,.35),transparent 65%),
+    linear-gradient(145deg,#071722,#0c2538 50%,#07121c);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.uc-img img{
+  width:94%;
+  height:94%;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 9px rgba(0,0,0,.55));
+}
+
+.package-info{
+  padding:14px;
+}
+
+.package h3{
+  font-size:18px;
+}
+
+.price{
+  color:#e4a052;
+  font-size:18px;
+  font-weight:900;
+  margin:9px 0 12px;
+}
+
+.buy-btn{
+  width:100%;
+  height:46px;
 }
 
 /* SERVICES */
@@ -322,32 +348,15 @@ body.light .header{
 .services{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:11px;
+  gap:13px;
 }
 
 .service{
-  position:relative;
-
-  min-height:115px;
-
-  padding:14px;
-
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  background:
-    linear-gradient(145deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.01)
-    ),
-    var(--card);
-
-  border:1px solid var(--border);
-  border-radius:19px;
-
-  box-shadow:var(--shadow);
-
+  padding:20px;
+  min-height:125px;
+  border:1px solid #343840;
+  border-radius:23px;
+  background:linear-gradient(145deg,#1b1e23,#15171b);
   transition:.2s;
 }
 
@@ -355,547 +364,68 @@ body.light .header{
   transform:scale(.97);
 }
 
-.serviceIcon{
-  width:61px;
-  height:61px;
-
-  flex:none;
-
-  border-radius:17px;
-
+.service-icon{
+  width:52px;
+  height:52px;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  overflow:hidden;
-
-  box-shadow:
-    inset 1px 1px 3px rgba(255,255,255,.35),
-    0 8px 20px rgba(0,0,0,.3);
+  font-size:27px;
+  margin-bottom:13px;
 }
 
-.pubgIcon{
-  background:
-    radial-gradient(circle at 50% 30%,#65c8ff,#0959a3 60%,#061d35);
-}
+.pubg{background:linear-gradient(145deg,#0087d9,#00518d)}
+.premium{background:linear-gradient(145deg,#8e45ff,#4810ad)}
+.stars{background:linear-gradient(145deg,#ffbf24,#c36c00)}
+.gift{background:linear-gradient(145deg,#c75cff,#6d16b4)}
 
-.premiumIcon{
-  background:
-    radial-gradient(circle at 50% 30%,#ffb7ff,#6d28ff 55%,#160a49);
-}
-
-.starsIcon{
-  background:
-    radial-gradient(circle at 50% 30%,#ffe680,#ff9c00 48%,#472100);
-}
-
-.giftIcon{
-  background:
-    radial-gradient(circle at 40% 30%,#ffb4f0,#8b24ff 48%,#21103e);
-}
-
-.serviceIcon svg{
-  width:43px;
-  height:43px;
-}
-
-.serviceText{
-  min-width:0;
-}
-
-.serviceText b{
-  display:block;
-  font-size:14px;
-  line-height:1.2;
-}
-
-.serviceText span{
-  display:block;
-  margin-top:5px;
-  font-size:11px;
-  color:var(--muted);
-}
-
-.arrow{
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-
-  color:#aab1bb;
-  font-size:21px;
-}
-
-/* LOOKUP */
-
-.lookup{
-  margin-top:22px;
-
-  padding:17px;
-
-  border-radius:22px;
-
-  background:
-    linear-gradient(145deg,
-      rgba(39,47,57,.65),
-      rgba(15,18,22,.8)
-    );
-
-  border:1px solid #353d46;
-
-  box-shadow:var(--shadow);
-}
-
-body.light .lookup{
-  background:var(--card);
-}
-
-.lookupTitle{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.lookupIcon{
-  width:43px;
-  height:43px;
-
-  border-radius:13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:var(--card2);
-  border:1px solid var(--border);
-}
-
-.lookupTitle b{
-  display:block;
+.service h3{
   font-size:17px;
 }
 
-.lookupTitle span{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:3px;
-}
-
-.lookupForm{
-  display:flex;
-  gap:9px;
-  margin-top:15px;
-}
-
-.lookupInput{
-  flex:1;
-  min-width:0;
-
-  height:49px;
-
-  border-radius:14px;
-  border:1px solid #3c444e;
-
-  background:#111418;
-  color:var(--text);
-
-  outline:none;
-
-  padding:0 14px;
-
-  font-size:14px;
-}
-
-body.light .lookupInput{
-  background:#f4f5f6;
-}
-
-.lookupInput:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 2px rgba(43,188,255,.12);
-}
-
-.checkBtn{
-  height:49px;
-  padding:0 17px;
-
-  border-radius:14px;
-
-  color:#fff;
-  font-weight:800;
-
-  background:
-    linear-gradient(135deg,#f0b86b,#a96427);
-
-  box-shadow:
-    0 6px 18px rgba(209,139,63,.23);
-}
-
-/* VERIFIED */
-
-.verified{
-  display:none;
-
-  margin-top:12px;
-
-  align-items:center;
-  gap:12px;
-
-  padding:12px;
-
-  border-radius:16px;
-
-  border:1px solid rgba(19,213,139,.35);
-
-  background:rgba(19,213,139,.07);
-}
-
-.verified.show{
-  display:flex;
-}
-
-.avatar{
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:white;
-
-  font-weight:900;
-
-  background:
-    linear-gradient(135deg,#236ea2,#0b2a48);
-
-  border:1px solid rgba(255,255,255,.2);
-}
-
-.verifiedText{
-  flex:1;
-}
-
-.verifiedText b{
-  display:block;
-}
-
-.verifiedText span{
-  display:block;
-  margin-top:3px;
-  color:var(--green);
-  font-size:12px;
-}
-
-.change{
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* UC PACKAGES */
-
-.ucGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.ucCard{
-  position:relative;
-  overflow:hidden;
-
-  min-height:220px;
-
-  border-radius:19px;
-
-  background:
-    linear-gradient(145deg,#1b2026,#13161a);
-
-  border:1px solid #30363d;
-
-  box-shadow:var(--shadow);
-
-  padding:10px;
-
-  transition:.2s;
-}
-
-.ucCard:active{
-  transform:scale(.97);
-}
-
-.ucTitle{
-  position:absolute;
-  top:11px;
-  left:12px;
-
-  z-index:3;
-
-  font-size:15px;
-  font-weight:900;
-}
-
-.ucImage{
-  height:123px;
-
-  margin:-10px -10px 0;
-
-  position:relative;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  background:
-    radial-gradient(circle at center,
-      rgba(43,188,255,.75),
-      rgba(13,53,83,.85) 48%,
-      #07121e 100%);
-}
-
-.ucImage:before{
-  content:"";
-
-  position:absolute;
-  inset:-30px;
-
-  background:
-    repeating-linear-gradient(
-      125deg,
-      transparent 0 15px,
-      rgba(67,195,255,.08) 16px 18px
-    );
-
-  transform:rotate(-7deg);
-}
-
-/* METAL UC */
-
-.coinStack{
-  position:relative;
-  z-index:2;
-
-  width:100px;
-  height:85px;
-
-  display:flex;
-  flex-wrap:wrap;
-
-  justify-content:center;
-  align-content:center;
-
-  gap:2px;
-}
-
-.coin{
-  width:34px;
-  height:27px;
-
-  border-radius:6px;
-
-  transform:rotate(-8deg);
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff7c9,
-      #d4bd79 25%,
-      #6e603c 48%,
-      #f3df9c 72%,
-      #827343
-    );
-
-  border:1px solid #eee0a5;
-
-  box-shadow:
-    inset 1px 1px 2px rgba(255,255,255,.9),
-    inset -2px -2px 3px rgba(0,0,0,.45),
-    0 3px 5px rgba(0,0,0,.4);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:8px;
-  font-weight:900;
-
-  color:#282719;
-}
-
-.coin:nth-child(even){
-  transform:rotate(7deg);
-}
-
-.coin:nth-child(3n){
-  transform:rotate(-3deg);
-}
-
-.ucPrice{
-  margin-top:9px;
-
-  font-size:15px;
-  font-weight:900;
-
-  color:#efb05e;
-}
-
-.ucCard .buy{
-  width:100%;
-  height:39px;
-
-  margin-top:9px;
-
-  border-radius:11px;
-
-  color:white;
-
-  font-weight:800;
-
-  background:
-    linear-gradient(135deg,#d8954b,#9b5a25);
-}
-
-/* EXTRA PACK */
-
-.extraGrid{
-  margin-top:10px;
-
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-/* BENEFITS */
-
-.benefits{
-  margin-top:20px;
-
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-
-.benefit{
-  padding:13px 9px;
-
-  text-align:center;
-
-  border-radius:17px;
-
-  background:var(--card);
-  border:1px solid var(--border);
-}
-
-.benefitIcon{
-  font-size:21px;
-  margin-bottom:7px;
-}
-
-.benefit b{
-  display:block;
-  font-size:11px;
-}
-
-.benefit span{
-  display:block;
-  margin-top:4px;
-  font-size:9px;
-  color:var(--muted);
-}
-
-/* OTHER PAGES */
-
-.infoCard{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:21px;
-  padding:19px;
-  box-shadow:var(--shadow);
-  margin-bottom:12px;
-}
-
-.balance{
-  font-size:31px;
-  font-weight:900;
-  margin:9px 0;
-}
-
-.primary{
-  width:100%;
-  height:48px;
-  border-radius:14px;
-
-  color:#fff;
-  font-weight:800;
-
-  background:
-    linear-gradient(135deg,#d8954b,#995923);
+.service p{
+  color:#858b94;
+  margin-top:5px;
+  font-size:13px;
 }
 
 /* NAV */
 
-.bottom{
+.nav{
   position:fixed;
-
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-
-  width:min(620px,calc(100% - 22px));
-
-  height:68px;
-
+  left:18px;
+  right:18px;
+  bottom:17px;
+  max-width:720px;
+  margin:auto;
+  height:78px;
+  background:rgba(27,30,35,.96);
+  border:1px solid #363b44;
+  border-radius:28px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-
-  z-index:200;
-
-  border-radius:23px;
-
-  background:rgba(26,30,36,.93);
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  border:1px solid #39404a;
-
-  box-shadow:0 12px 35px rgba(0,0,0,.35);
+  z-index:100;
+  box-shadow:0 15px 45px rgba(0,0,0,.5);
+  backdrop-filter:blur(18px);
 }
 
-body.light .bottom{
-  background:rgba(255,255,255,.94);
-  border-color:var(--border);
-}
-
-.nav{
-  background:none;
-  color:#8f97a2;
-
+.nav-item{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
-  gap:4px;
+  gap:5px;
+  color:#858c96;
+  font-size:12px;
 }
 
-.nav.active{
-  color:var(--bronze2);
+.nav-item.active{
+  color:#e2a052;
 }
 
-.navIcon{
-  width:23px;
-  height:23px;
-}
-
-.navText{
-  font-size:10px;
-  font-weight:700;
+.nav-icon{
+  font-size:24px;
 }
 
 /* MODAL */
@@ -903,14 +433,11 @@ body.light .bottom{
 .modal{
   position:fixed;
   inset:0;
-
-  z-index:500;
-
+  background:rgba(0,0,0,.7);
   display:none;
   align-items:flex-end;
-
-  background:rgba(0,0,0,.65);
-
+  justify-content:center;
+  z-index:200;
   backdrop-filter:blur(5px);
 }
 
@@ -918,196 +445,132 @@ body.light .bottom{
   display:flex;
 }
 
-.modalBox{
-  width:min(650px,100%);
-
-  max-height:88vh;
-  overflow:auto;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-
-  border-radius:27px 27px 0 0;
-
-  padding:21px;
-
+.sheet{
+  width:100%;
+  max-width:600px;
+  background:#17191e;
+  border-radius:28px 28px 0 0;
+  padding:24px;
+  border:1px solid #373b43;
   animation:up .25s ease;
 }
 
 @keyframes up{
   from{transform:translateY(100%)}
-  to{transform:none}
+  to{transform:translateY(0)}
 }
 
-.modalHead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
+.sheet h2{
   margin-bottom:18px;
 }
 
-.close{
-  width:38px;
-  height:38px;
-
-  border-radius:50%;
-
-  color:var(--text);
-  background:var(--card2);
-  border:1px solid var(--border);
-
-  font-size:22px;
+.sheet .input{
+  width:100%;
+  margin-bottom:12px;
 }
 
-.modalInfo{
-  padding:15px;
-
+.submit{
+  width:100%;
+  height:54px;
+  background:linear-gradient(145deg,#e7a553,#b66b27);
+  color:white;
   border-radius:17px;
-
-  background:var(--card2);
-  border:1px solid var(--border);
+  font-weight:800;
 }
 
-.field{
-  margin-top:14px;
-}
-
-.field label{
-  display:block;
-
-  color:var(--muted);
-
-  font-size:12px;
-  font-weight:700;
-
-  margin-bottom:7px;
-}
-
-.field input{
+.close{
   width:100%;
   height:48px;
-
-  border-radius:13px;
-
-  background:var(--bg2);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-
-  outline:none;
-
-  padding:0 14px;
-
-  font-size:15px;
+  background:#262a30;
+  color:#aeb3bb;
+  border-radius:16px;
+  margin-top:10px;
 }
 
-/* TOAST */
+/* LOADING */
 
-.toast{
-  position:fixed;
-
-  left:50%;
-  bottom:92px;
-
-  transform:translateX(-50%) translateY(20px);
-
-  z-index:1000;
-
-  opacity:0;
-  pointer-events:none;
-
-  padding:12px 17px;
-
-  border-radius:13px;
-
-  color:#fff;
-
-  background:#24282e;
-  border:1px solid #454c55;
-
-  transition:.3s;
-
-  font-size:13px;
-
-  white-space:nowrap;
+.verify{
+  text-align:center;
+  color:#dca055;
+  display:none;
+  padding:15px;
 }
 
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%);
+.verify.show{
+  display:block;
+}
+
+.spinner{
+  width:22px;
+  height:22px;
+  border:3px solid #4a4e55;
+  border-top-color:#dda052;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:8px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
 /* MOBILE */
 
-@media(max-width:430px){
+@media(max-width:600px){
+
+  .container{
+    padding:18px 14px;
+  }
 
   .hero{
-    height:170px;
+    min-height:190px;
+    padding:24px;
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:38px;
   }
 
-  .heroCoin{
-    width:88px;
-    height:88px;
-    right:14px;
+  .hero-coin{
+    width:90px;
+    height:90px;
+    right:17px;
   }
 
-  .service{
-    min-height:108px;
-    padding:11px;
+  .packages{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .serviceIcon{
-    width:53px;
-    height:53px;
+  .uc-img{
+    height:130px;
   }
 
-  .serviceText b{
-    font-size:13px;
-  }
-
-  .ucCard{
-    min-height:213px;
-  }
-
-  .ucImage{
-    height:116px;
-  }
-
-  .coin{
-    width:31px;
-    height:25px;
-    font-size:7px;
-  }
-
-  .benefits{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:360px){
-
-  .services{
-    grid-template-columns:1fr;
-  }
-
-  .ucGrid,
-  .extraGrid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .lookupForm{
+  .input-row{
     flex-direction:column;
   }
 
-  .checkBtn{
-    width:100%;
+  .check-btn{
+    height:50px;
+  }
+
+  .services{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:390px){
+  .packages{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .package h3{
+    font-size:16px;
+  }
+
+  .price{
+    font-size:16px;
   }
 }
 </style>
@@ -1115,1139 +578,505 @@ body.light .bottom{
 
 <body>
 
-<div class="app">
-
-<!-- HEADER -->
-
-<header class="header">
-
-  <div class="logo">
-    <div class="logoBox">A5</div>
-
-    <div class="logoText">
-      A5 <span>UC</span>
-    </div>
+<header class="top">
+  <div class="logo-area">
+    <div class="logo">A5</div>
+    <div class="brand">A5 <span>UC</span></div>
   </div>
 
-  <button class="theme" onclick="toggleTheme()" id="theme">
-    ☾
-  </button>
-
+  <button class="theme" onclick="toggleTheme()">☾</button>
 </header>
 
+<main class="container">
 
-<!-- HOME -->
+  <section class="hero">
+    <small>PREMIUM DIGITAL SHOP</small>
+    <h1>A5 <span>UC</span></h1>
+    <p>PUBG Mobile va Telegram xizmatlari</p>
 
-<section class="page active" id="home">
+    <div class="hero-coin">A5</div>
+  </section>
 
-  <!-- HERO -->
+  <!-- XIZMATLAR -->
 
-  <div class="hero">
-
-    <div class="heroGlow"></div>
-
-    <div class="heroContent">
-
-      <div class="heroMini">
-        PREMIUM DIGITAL SHOP
-      </div>
-
-      <h1>
-        A5 <span>UC</span>
-      </h1>
-
-      <p>
-        PUBG Mobile va Telegram xizmatlari
-      </p>
-
-    </div>
-
-    <div class="heroCoin">
-      UC
-    </div>
-
-  </div>
-
-
-  <!-- SERVICES -->
-
-  <div class="sectionHead">
+  <div class="section-title">
     <h2>Xizmatlar</h2>
     <span>Keraklisini tanlang</span>
   </div>
 
-
   <div class="services">
 
-    <!-- PUBG -->
-
-    <div class="service"
-         onclick="showPUBG()">
-
-      <div class="serviceIcon pubgIcon">
-
-        <svg viewBox="0 0 100 100">
-          <path
-            fill="#fff"
-            d="M50 14c-17 0-28 12-28 29v14c0 17 11 29 28 29s28-12 28-29V43C78 26 67 14 50 14z"
-            opacity=".9"/>
-
-          <path
-            fill="#17202a"
-            d="M37 42h26v21H37z"/>
-
-          <path
-            fill="#fff"
-            d="M41 46h18v13H41z"/>
-
-          <text
-            x="50"
-            y="56"
-            text-anchor="middle"
-            font-size="7"
-            font-weight="900">
-            PUBG
-          </text>
-        </svg>
-
-      </div>
-
-      <div class="serviceText">
-        <b>PUBG Mobile</b>
-        <span>UC sotib olish</span>
-      </div>
-
-      <div class="arrow">›</div>
-
+    <div class="service" onclick="openService('pubg')">
+      <div class="service-icon pubg">🎮</div>
+      <h3>PUBG Mobile</h3>
+      <p>UC sotib olish</p>
     </div>
 
-
-    <!-- PREMIUM -->
-
-    <div class="service"
-         onclick="showPremium()">
-
-      <div class="serviceIcon premiumIcon">
-
-        <svg viewBox="0 0 100 100">
-          <path
-            fill="#fff"
-            d="M50 11l11 27 29 2-22 19 7 29-25-15-25 15 7-29-22-19 29-2z"/>
-        </svg>
-
-      </div>
-
-      <div class="serviceText">
-        <b>Telegram Premium</b>
-        <span>Premium obuna</span>
-      </div>
-
-      <div class="arrow">›</div>
-
+    <div class="service" onclick="openService('premium')">
+      <div class="service-icon premium">★</div>
+      <h3>Telegram Premium</h3>
+      <p>Premium obuna</p>
     </div>
 
-
-    <!-- STARS -->
-
-    <div class="service"
-         onclick="showStars()">
-
-      <div class="serviceIcon starsIcon">
-
-        <svg viewBox="0 0 100 100">
-          <path
-            fill="#fff"
-            d="M50 8l10 27 29 1-23 18 8 28-24-16-24 16 8-28-23-18 29-1z"/>
-        </svg>
-
-      </div>
-
-      <div class="serviceText">
-        <b>Telegram Stars</b>
-        <span>Yulduzlar</span>
-      </div>
-
-      <div class="arrow">›</div>
-
+    <div class="service" onclick="openService('stars')">
+      <div class="service-icon stars">★</div>
+      <h3>Telegram Stars</h3>
+      <p>Yulduzlar</p>
     </div>
 
-
-    <!-- GIFTS -->
-
-    <div class="service"
-         onclick="showGifts()">
-
-      <div class="serviceIcon giftIcon">
-
-        <svg viewBox="0 0 100 100">
-
-          <rect
-            x="19" y="36"
-            width="62"
-            height="48"
-            rx="7"
-            fill="#fff"/>
-
-          <rect
-            x="16" y="27"
-            width="68"
-            height="14"
-            rx="5"
-            fill="#ffb4e8"/>
-
-          <path
-            d="M50 27v57"
-            stroke="#8b24ff"
-            stroke-width="8"/>
-
-          <path
-            d="M50 27C35 27 28 17 34 11c7-6 16 7 16 16z"
-            fill="#ffd1f2"/>
-
-          <path
-            d="M50 27c15 0 22-10 16-16-7-6-16 7-16 16z"
-            fill="#ffd1f2"/>
-
-        </svg>
-
-      </div>
-
-      <div class="serviceText">
-        <b>Telegram Sovg‘alari</b>
-        <span>Raqamli sovg‘alar</span>
-      </div>
-
-      <div class="arrow">›</div>
-
+    <div class="service" onclick="openService('gift')">
+      <div class="service-icon gift">🎁</div>
+      <h3>Telegram Sovg‘alari</h3>
+      <p>Raqamli sovg‘alar</p>
     </div>
 
   </div>
 
+  <!-- PUBG ID -->
 
-  <!-- ID LOOKUP -->
+  <section class="check-card" id="pubgCheck">
 
-  <div class="lookup">
-
-    <div class="lookupTitle">
-
-      <div class="lookupIcon">
-
-        <svg width="25" height="25"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="1.8">
-
-          <circle cx="12" cy="8" r="4"/>
-          <path d="M4 21c0-4 3-7 8-7s8 3 8 7"/>
-
-        </svg>
-
-      </div>
+    <div class="check-head">
+      <div class="user-icon">♙</div>
 
       <div>
-        <b>ID yoki @username</b>
-        <span>Akkauntni tekshiring</span>
+        <h3>PUBG Player ID</h3>
+        <p>Akkauntingizni tekshiring</p>
       </div>
-
     </div>
 
-
-    <div class="lookupForm">
-
+    <div class="input-row">
       <input
-        class="lookupInput"
-        id="lookupInput"
-        placeholder="ID yoki @username"
-        autocomplete="off">
+        id="pubgId"
+        class="input"
+        type="text"
+        inputmode="numeric"
+        placeholder="PUBG ID kiriting"
+      >
 
-      <button class="checkBtn"
-              onclick="checkAccount()">
+      <button class="check-btn" onclick="verifyPUBG()">
         Tekshirish
       </button>
-
     </div>
 
+    <div class="verify" id="verify">
+      <span class="spinner"></span>
+      ID tekshirilmoqda...
+    </div>
 
-    <!-- RESULT -->
-
-    <div class="verified" id="verified">
-
-      <div class="avatar" id="avatar">
-        A
+    <div class="player" id="player">
+      <div>
+        <div class="player-name" id="playerName">—</div>
+        <small id="playerIdText">@—</small>
       </div>
 
-      <div class="verifiedText">
+      <span class="change">O‘zgartirish</span>
+    </div>
 
-        <b id="accountName">
-          Akkaunt
-        </b>
+  </section>
 
-        <span id="accountUsername">
-          @username
-        </span>
+  <!-- UC -->
 
+  <div class="section-title">
+    <h2>UC paketlari</h2>
+    <span>PUBG Mobile</span>
+  </div>
+
+  <div class="packages">
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-60.png">
       </div>
-
-      <div class="change">
-        O‘zgartirish
+      <div class="package-info">
+        <h3>60 UC</h3>
+        <div class="price">11 500 so‘m</div>
+        <button class="buy-btn" onclick="buyUC(60,11500)">Sotib olish</button>
       </div>
+    </div>
 
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-325.png">
+      </div>
+      <div class="package-info">
+        <h3>325 UC</h3>
+        <div class="price">57 500 so‘m</div>
+        <button class="buy-btn" onclick="buyUC(325,57500)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-660.png">
+      </div>
+      <div class="package-info">
+        <h3>660 UC</h3>
+        <div class="price">115 000 so‘m</div>
+        <button class="buy-btn" onclick="buyUC(660,115000)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-1800.png">
+      </div>
+      <div class="package-info">
+        <h3>1800 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(1800,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-3850.png">
+      </div>
+      <div class="package-info">
+        <h3>3850 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(3850,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-8100.png">
+      </div>
+      <div class="package-info">
+        <h3>8100 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(8100,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-12000.png">
+      </div>
+      <div class="package-info">
+        <h3>12 000 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(12000,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-18000.png">
+      </div>
+      <div class="package-info">
+        <h3>18 000 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(18000,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-24000.png">
+      </div>
+      <div class="package-info">
+        <h3>24 000 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(24000,0)">Sotib olish</button>
+      </div>
+    </div>
+
+    <div class="package">
+      <div class="uc-img">
+        <img src="assets/uc-30000.png">
+      </div>
+      <div class="package-info">
+        <h3>30 000 UC</h3>
+        <div class="price">— so‘m</div>
+        <button class="buy-btn" onclick="buyUC(30000,0)">Sotib olish</button>
+      </div>
     </div>
 
   </div>
 
-
-  <!-- PUBG PACKAGES -->
-
-  <div id="pubgArea">
-
-    <div class="sectionHead">
-      <h2>UC paketlari</h2>
-      <span>PUBG Mobile</span>
-    </div>
-
-
-    <div class="ucGrid">
-
-      <!-- 60 -->
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          60 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          11 500 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(60,11500,1)">
-          Sotib olish
-        </button>
-
-      </div>
-
-
-      <!-- 325 -->
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          325 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          57 500 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(325,57500,5)">
-          Sotib olish
-        </button>
-
-      </div>
-
-
-      <!-- 660 -->
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          660 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          115 000 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(660,115000,10)">
-          Sotib olish
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- EXTRA PACKAGES -->
-
-    <div class="extraGrid">
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          1800 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          290 000 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(1800,290000,10)">
-          Sotib olish
-        </button>
-
-      </div>
-
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          3850 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          578 000 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(3850,578000,10)">
-          Sotib olish
-        </button>
-
-      </div>
-
-
-      <div class="ucCard">
-
-        <div class="ucTitle">
-          8100 UC
-        </div>
-
-        <div class="ucImage">
-
-          <div class="coinStack">
-
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-            <div class="coin">UC</div>
-
-          </div>
-
-        </div>
-
-        <div class="ucPrice">
-          1 160 000 so‘m
-        </div>
-
-        <button class="buy"
-          onclick="order(8100,1160000,10)">
-          Sotib olish
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- BENEFITS -->
-
-  <div class="benefits">
-
-    <div class="benefit">
-      <div class="benefitIcon">🛡</div>
-      <b>Xavfsiz</b>
-      <span>Ishonchli xizmat</span>
-    </div>
-
-    <div class="benefit">
-      <div class="benefitIcon">⚡</div>
-      <b>Tezkor</b>
-      <span>Tez yetkazish</span>
-    </div>
-
-    <div class="benefit">
-      <div class="benefitIcon">♧</div>
-      <b>Yordam</b>
-      <span>Qo‘llab-quvvatlash</span>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ORDERS -->
-
-<section class="page" id="orders">
-
-  <div class="sectionHead">
-    <h2>Buyurtmalarim</h2>
-  </div>
-
-  <div class="infoCard">
-
-    <div style="font-size:32px;margin-bottom:10px;">
-      ◷
-    </div>
-
-    <b>Buyurtmalar mavjud emas</b>
-
-    <p style="
-      color:var(--muted);
-      font-size:13px;
-      margin-top:7px;
-      line-height:1.5;
-    ">
-      UC yoki boshqa xizmat sotib olganingizdan
-      keyin buyurtmalaringiz shu yerda chiqadi.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- WALLET -->
-
-<section class="page" id="wallet">
-
-  <div class="sectionHead">
-    <h2>Hamyon</h2>
-  </div>
-
-  <div class="infoCard">
-
-    <div style="
-      color:var(--muted);
-      font-size:12px;
-    ">
-      Balansingiz
-    </div>
-
-    <div class="balance">
-      0 so‘m
-    </div>
-
-    <div style="
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.5;
-    ">
-      Balansingiz orqali mavjud xizmatlardan
-      foydalanishingiz mumkin.
-    </div>
-
-    <button class="primary"
-            style="margin-top:16px"
-            onclick="wallet()">
-      Balans to‘ldirish
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- PROFILE -->
-
-<section class="page" id="profile">
-
-  <div class="sectionHead">
-    <h2>Profil</h2>
-  </div>
-
-  <div class="infoCard">
-
-    <div class="avatar">
-      <span id="profileLetter">A</span>
-    </div>
-
-    <div style="margin-top:12px">
-
-      <b id="profileName">
-        Telegram foydalanuvchi
-      </b>
-
-      <p style="
-        color:var(--muted);
-        font-size:12px;
-        margin-top:5px;
-      ">
-        ID:
-        <span id="telegramId">
-          —
-        </span>
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
+</main>
 
 <!-- BOTTOM NAV -->
 
-<nav class="bottom">
+<nav class="nav">
 
-  <button class="nav active"
-          onclick="page('home',this)">
+  <div class="nav-item active">
+    <div class="nav-icon">⌂</div>
+    <span>Bosh sahifa</span>
+  </div>
 
-    <svg class="navIcon"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2">
+  <div class="nav-item">
+    <div class="nav-icon">▤</div>
+    <span>Buyurtmalar</span>
+  </div>
 
-      <path d="M3 10.5L12 3l9 7.5"/>
-      <path d="M5 9v11h14V9"/>
-      <path d="M9 20v-6h6v6"/>
+  <div class="nav-item">
+    <div class="nav-icon">▣</div>
+    <span>Hamyon</span>
+  </div>
 
-    </svg>
-
-    <span class="navText">
-      Bosh sahifa
-    </span>
-
-  </button>
-
-
-  <button class="nav"
-          onclick="page('orders',this)">
-
-    <svg class="navIcon"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2">
-
-      <rect x="5" y="3" width="14" height="18" rx="2"/>
-      <path d="M8 8h8M8 12h8M8 16h5"/>
-
-    </svg>
-
-    <span class="navText">
-      Buyurtmalarim
-    </span>
-
-  </button>
-
-
-  <button class="nav"
-          onclick="page('wallet',this)">
-
-    <svg class="navIcon"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2">
-
-      <path d="M4 7h15a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h12"/>
-      <path d="M16 13h5"/>
-
-    </svg>
-
-    <span class="navText">
-      Hamyon
-    </span>
-
-  </button>
-
-
-  <button class="nav"
-          onclick="page('profile',this)">
-
-    <svg class="navIcon"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2">
-
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 21c0-4 3-7 8-7s8 3 8 7"/>
-
-    </svg>
-
-    <span class="navText">
-      Profil
-    </span>
-
-  </button>
+  <div class="nav-item">
+    <div class="nav-icon">♙</div>
+    <span>Profil</span>
+  </div>
 
 </nav>
 
-</div>
+<!-- MODAL -->
 
+<div class="modal" id="modal">
 
-<!-- ORDER MODAL -->
+  <div class="sheet">
 
-<div class="modal" id="orderModal">
+    <h2 id="modalTitle">Telegram Premium</h2>
 
-  <div class="modalBox">
+    <input
+      id="username"
+      class="input"
+      placeholder="@username"
+    >
 
-    <div class="modalHead">
+    <button class="submit" onclick="submitService()">
+      Davom etish
+    </button>
 
-      <h2>UC buyurtma</h2>
-
-      <button class="close"
-              onclick="closeModal('orderModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modalInfo">
-
-      <b id="selectedUC">
-        60 UC
-      </b>
-
-      <div style="
-        color:var(--bronze2);
-        margin-top:6px;
-        font-weight:800;
-      "
-      id="selectedPrice">
-        11 500 so‘m
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        PUBG Mobile Player ID
-      </label>
-
-      <input
-        id="playerID"
-        inputmode="numeric"
-        placeholder="Player ID">
-
-    </div>
-
-
-    <button class="primary"
-            style="margin-top:17px"
-            onclick="submitOrder()">
-      Buyurtma berish
+    <button class="close" onclick="closeModal()">
+      Bekor qilish
     </button>
 
   </div>
 
 </div>
 
-
-<!-- TOAST -->
-
-<div class="toast" id="toast">
-  Tayyor
-</div>
-
-
 <script>
-
-/* TELEGRAM */
 
 const tg = window.Telegram?.WebApp;
 
 if(tg){
-
   tg.ready();
   tg.expand();
-
-  const user =
-    tg.initDataUnsafe?.user;
-
-  if(user){
-
-    const name =
-      user.first_name ||
-      "Telegram foydalanuvchi";
-
-    document.getElementById(
-      "profileName"
-    ).textContent = name;
-
-    document.getElementById(
-      "telegramId"
-    ).textContent = user.id || "—";
-
-    document.getElementById(
-      "profileLetter"
-    ).textContent =
-      name.charAt(0).toUpperCase();
-
-  }
-
 }
 
-
-/* THEME */
-
-const saved =
-  localStorage.getItem("a5_theme");
-
-if(saved === "light"){
-  document.body.classList.add("light");
-  document.getElementById("theme").textContent="☀";
-}
-
-function toggleTheme(){
-
-  document.body.classList.toggle("light");
-
-  const light =
-    document.body.classList.contains("light");
-
-  localStorage.setItem(
-    "a5_theme",
-    light ? "light" : "dark"
-  );
-
-  document.getElementById(
-    "theme"
-  ).textContent =
-    light ? "☀" : "☾";
-}
-
-
-/* NAVIGATION */
-
-function page(id,btn){
-
-  document.querySelectorAll(".page")
-    .forEach(x =>
-      x.classList.remove("active")
-    );
-
-  document.getElementById(id)
-    .classList.add("active");
-
-  document.querySelectorAll(".nav")
-    .forEach(x =>
-      x.classList.remove("active")
-    );
-
-  btn.classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* SERVICES */
-
-function showPUBG(){
-
-  document.getElementById(
-    "pubgArea"
-  ).scrollIntoView({
-    behavior:"smooth"
-  });
-
-}
-
-function showPremium(){
-
-  toast(
-    "Telegram Premium bo‘limini keyin sozlaymiz."
-  );
-
-}
-
-function showStars(){
-
-  toast(
-    "Telegram Stars bo‘limi keyin sozlanadi."
-  );
-
-}
-
-function showGifts(){
-
-  toast(
-    "Telegram Sovg‘alari bo‘limi keyin sozlanadi."
-  );
-
-}
-
-
-/* ACCOUNT CHECK */
-
-function checkAccount(){
-
-  const input =
-    document.getElementById(
-      "lookupInput"
-    ).value.trim();
-
-  if(!input){
-
-    toast(
-      "ID yoki @username kiriting"
-    );
-
-    return;
-  }
-
-  /*
-    HOZIR DEMO.
-
-    Keyinchalik backend:
-    ID/@username -> haqiqiy akkaunt
-    nomi, username, avatar
-    ma'lumotlarini qaytaradi.
-  */
-
-  let name = "A5 User";
-  let username = input;
-
-  if(input.startsWith("@")){
-
-    username = input;
-
-    name =
-      input
-      .replace("@","")
-      .replace(/_/g," ")
-      .toUpperCase();
-
-  }else{
-
-    username =
-      "@player_" + input.slice(-4);
-
-    name = "PUBG Player";
-
-  }
-
-  document.getElementById(
-    "accountName"
-  ).textContent = name;
-
-  document.getElementById(
-    "accountUsername"
-  ).textContent = username;
-
-  document.getElementById(
-    "avatar"
-  ).textContent =
-    name.charAt(0).toUpperCase();
-
-  document.getElementById(
-    "verified"
-  ).classList.add("show");
-
-  toast(
-    "Akkaunt topildi"
-  );
-
-}
-
-
-/* ORDER */
-
+let selectedService = "";
 let selectedUC = 0;
 let selectedPrice = 0;
 
-function order(uc,price){
+/* THEME */
+
+function toggleTheme(){
+  document.body.classList.toggle("light");
+
+  if(document.body.classList.contains("light")){
+    document.body.style.setProperty("--bg","#eeeeeb");
+    document.body.style.setProperty("--card","#ffffff");
+    document.body.style.setProperty("--text","#171717");
+  }else{
+    document.body.style.removeProperty("--bg");
+    document.body.style.removeProperty("--card");
+    document.body.style.removeProperty("--text");
+  }
+}
+
+/* PUBG VERIFY */
+
+async function verifyPUBG(){
+
+  const id = document.getElementById("pubgId").value.trim();
+  const loading = document.getElementById("verify");
+  const player = document.getElementById("player");
+
+  player.classList.remove("active");
+
+  if(!id){
+    alert("PUBG Player ID kiriting.");
+    return;
+  }
+
+  loading.classList.add("show");
+
+  /*
+    MUHIM:
+    Bu yerga haqiqiy PUBG ID verification API ulanadi.
+
+    Backend endpoint:
+    POST /api/verify-pubg
+
+    yuboriladi:
+    { "player_id": "123456789" }
+
+    Javob:
+    {
+      "success": true,
+      "player_name": "PlayerName"
+    }
+  */
+
+  try{
+
+    const response = await fetch("/api/verify-pubg",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        player_id:id
+      })
+    });
+
+    const data = await response.json();
+
+    loading.classList.remove("show");
+
+    if(!data.success){
+      alert(data.message || "ID topilmadi.");
+      return;
+    }
+
+    document.getElementById("playerName").textContent =
+      data.player_name;
+
+    document.getElementById("playerIdText").textContent =
+      "ID: " + id;
+
+    player.classList.add("active");
+
+  }catch(error){
+
+    loading.classList.remove("show");
+
+    alert(
+      "PUBG ID tekshirish serveri hali ulanmagan."
+    );
+  }
+}
+
+/* UC */
+
+function buyUC(uc,price){
 
   selectedUC = uc;
   selectedPrice = price;
 
-  document.getElementById(
-    "selectedUC"
-  ).textContent =
-    uc + " UC";
-
-  document.getElementById(
-    "selectedPrice"
-  ).textContent =
-    price.toLocaleString("uz-UZ")
-    + " so‘m";
-
-  document.getElementById(
-    "orderModal"
-  ).classList.add("show");
-
-}
-
-
-/* SUBMIT */
-
-function submitOrder(){
-
   const id =
-    document.getElementById(
-      "playerID"
-    ).value.trim();
+    document.getElementById("pubgId").value.trim();
 
   if(!id){
 
-    toast(
-      "Player ID kiriting"
+    document.getElementById("pubgId").focus();
+
+    alert(
+      "Avval PUBG Player ID kiriting va Tekshirish tugmasini bosing."
     );
 
     return;
   }
 
-  toast(
-    "Backend ulanmagan. Keyingi bosqichda buyurtma yuborishni ulaymiz."
+  if(!document
+    .getElementById("player")
+    .classList.contains("active")){
+
+    alert(
+      "Avval PUBG ID tekshirilishi kerak."
+    );
+
+    return;
+  }
+
+  alert(
+    selectedUC +
+    " UC tanlandi.\nNarxi: " +
+    (selectedPrice
+      ? selectedPrice.toLocaleString("uz-UZ")+" so‘m"
+      : "hali belgilanmagan")
   );
 
 }
 
+/* SERVICES */
 
-/* WALLET */
+function openService(type){
 
-function wallet(){
+  selectedService = type;
 
-  toast(
-    "Balans to‘ldirish bo‘limini keyin ulaymiz."
-  );
+  const title =
+    document.getElementById("modalTitle");
 
+  const input =
+    document.getElementById("username");
+
+  if(type === "premium"){
+    title.textContent = "Telegram Premium";
+    input.placeholder = "@username";
+  }
+
+  if(type === "stars"){
+    title.textContent = "Telegram Stars";
+    input.placeholder = "@username";
+  }
+
+  if(type === "gift"){
+    title.textContent = "Telegram Sovg‘alari";
+    input.placeholder = "@username";
+  }
+
+  if(type === "pubg"){
+    document
+      .getElementById("pubgId")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+    return;
+  }
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
 }
 
+function submitService(){
 
-/* CLOSE */
+  const username =
+    document.getElementById("username")
+      .value.trim();
 
-function closeModal(id){
+  if(!username){
+    alert("@username kiriting.");
+    return;
+  }
 
-  document.getElementById(id)
+  if(!username.startsWith("@")){
+    alert("@username ni @ belgisi bilan kiriting.");
+    return;
+  }
+
+  alert(
+    "Buyurtma ma'lumotlari qabul qilindi.\n\n" +
+    "Xizmat: " + selectedService +
+    "\nUsername: " + username +
+    "\n\nBackend ulangandan keyin buyurtma admin paneliga yuboriladi."
+  );
+
+  closeModal();
+}
+
+function closeModal(){
+  document
+    .getElementById("modal")
     .classList.remove("show");
-
 }
 
+document
+  .getElementById("modal")
+  .addEventListener("click",function(e){
 
-/* OUTSIDE MODAL */
-
-document.querySelectorAll(".modal")
-.forEach(m => {
-
-  m.addEventListener(
-    "click",
-    e => {
-
-      if(e.target === m){
-        m.classList.remove("show");
-      }
-
+    if(e.target === this){
+      closeModal();
     }
-  );
 
-});
-
-
-/* TOAST */
-
-let toastTimer;
-
-function toast(text){
-
-  const t =
-    document.getElementById("toast");
-
-  t.textContent = text;
-
-  t.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(()=>{
-      t.classList.remove("show");
-    },2600);
-
-}
+  });
 
 </script>
 
