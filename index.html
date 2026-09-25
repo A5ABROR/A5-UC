@@ -2,2038 +2,1595 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>A5 UC</title>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
+:root{
+  --bg:#020b08;
+  --panel:#061712;
+  --panel2:#09231b;
+  --green:#19ff9b;
+  --green2:#00c878;
+  --text:#eafff5;
+  --muted:#75a994;
+  --red:#ff426d;
 }
 
-:root {
-    --bg: #050b18;
-    --card: #0b1730;
-    --card2: #101f3d;
-    --blue: #159cff;
-    --blue2: #006eff;
-    --purple: #7b4dff;
-    --green: #18d88b;
-    --red: #ff4057;
-    --text: #ffffff;
-    --muted: #8d9ab3;
-    --border: rgba(255,255,255,.08);
+*{
+  box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%, #123e75 0%, transparent 35%),
-        var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 85px;
+html,body{
+  margin:0;
+  background:#010604;
+  color:var(--text);
+  font-family:Arial,sans-serif;
 }
 
-button,
-input {
-    font: inherit;
+body{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(0,255,150,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,150,.045) 1px,transparent 1px),
+    radial-gradient(circle at 50% 0%,#073323 0%,#020b08 42%,#010604 100%);
+  background-size:42px 42px,42px 42px,100% 100%;
 }
 
-button {
-    border: none;
-    color: white;
-    cursor: pointer;
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(
+    circle at 50% 25%,
+    rgba(25,255,155,.08),
+    transparent 38%
+  );
+}
+
+.app{
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:82px;
+  position:relative;
 }
 
 /* HEADER */
 
-.header {
-    padding: 18px 16px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  padding:13px 16px 10px;
+  background:rgba(2,11,8,.86);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(25,255,155,.16);
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 9px;
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
 }
 
-.logo-circle {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    background: linear-gradient(135deg,#00aaff,#6f3cff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 18px;
-    box-shadow: 0 0 25px rgba(0,153,255,.45);
-    animation: logoPulse 2.2s infinite;
+.logoMark{
+  width:44px;
+  height:44px;
+  border:2px solid var(--green);
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-weight:900;
+  font-size:22px;
+  box-shadow:
+    0 0 18px rgba(25,255,155,.4),
+    inset 0 0 18px rgba(25,255,155,.12);
 }
 
-@keyframes logoPulse {
-    0%,100% {
-        transform: scale(1);
-        box-shadow: 0 0 18px rgba(0,153,255,.35);
-    }
-    50% {
-        transform: scale(1.06);
-        box-shadow: 0 0 35px rgba(0,153,255,.7);
-    }
+.logoText{
+  font-weight:900;
+  font-size:27px;
+  letter-spacing:2px;
+  text-shadow:0 0 12px rgba(25,255,155,.65);
 }
 
-.logo-title {
-    font-size: 21px;
-    font-weight: 900;
+.logoText span{
+  color:var(--green);
 }
 
-.logo-sub {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 2px;
+/* SCREENS */
+
+.screen{
+  display:none;
+  padding:14px 14px 0;
 }
 
-.telegram-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 13px;
-    background: #168ce8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19px;
+.screen.active{
+  display:block;
 }
 
-/* PAGES */
+/* HERO */
 
-.page {
-    display: none;
-    padding: 0 14px;
-    animation: fade .2s ease;
+.hero{
+  min-height:190px;
+  border:1px solid rgba(25,255,155,.42);
+  border-radius:20px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  position:relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      #06251a,
+      #03100c 55%,
+      #0a2c20
+    );
+
+  box-shadow:
+    0 0 28px rgba(0,255,150,.12),
+    inset 0 0 25px rgba(0,255,150,.04);
 }
 
-.page.active {
-    display: block;
+.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border:1px solid rgba(25,255,155,.25);
+  transform:rotate(45deg);
+  right:-80px;
+  top:-65px;
 }
 
-@keyframes fade {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hero h1{
+  font-size:29px;
+  margin:0 0 7px;
+  position:relative;
+  z-index:1;
 }
 
-/* BANNER */
-
-.slider {
-    height: 175px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    margin: 8px 0 16px;
-    background:
-        linear-gradient(110deg,#064b9d,#09162f 60%,#401778);
-    border: 1px solid rgba(42,156,255,.35);
+.hero p{
+  color:#8ed1b4;
+  margin:0 0 12px;
+  position:relative;
+  z-index:1;
 }
 
-.slide {
-    position: absolute;
-    inset: 0;
-    padding: 23px;
-    display: none;
-    overflow: hidden;
+.dots{
+  text-align:center;
+  padding:9px;
 }
 
-.slide.active {
-    display: block;
+.dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#255545;
+  margin:3px;
 }
 
-.slide h2 {
-    font-size: 23px;
-    max-width: 190px;
-    line-height: 1.05;
-    position: relative;
-    z-index: 2;
+.dot.on{
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
 }
 
-.slide p {
-    color: #b9c8e0;
-    font-size: 12px;
-    margin-top: 8px;
-    position: relative;
-    z-index: 2;
+/* TITLES */
+
+.sectionTitle{
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:#91cdb5;
+  margin:19px 2px 10px;
 }
 
-.slide button {
-    background: #168fff;
-    border-radius: 10px;
-    padding: 9px 15px;
-    margin-top: 13px;
-    font-size: 12px;
-    font-weight: 700;
-    position: relative;
-    z-index: 2;
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-.slide-art {
-    position: absolute;
-    right: -15px;
-    bottom: -25px;
-    font-size: 105px;
-    opacity: .35;
-    transform: rotate(-8deg);
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,35,27,.95),
+      rgba(3,14,11,.95)
+    );
+
+  border:1px solid rgba(25,255,155,.26);
+  border-radius:16px;
+  padding:15px;
+
+  box-shadow:
+    inset 0 0 20px rgba(25,255,155,.025);
 }
 
-.dots {
-    position: absolute;
-    bottom: 9px;
-    left: 0;
-    right: 0;
-    text-align: center;
+.category{
+  min-height:115px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #70829e;
-    margin: 0 3px;
+.category:hover{
+  transform:translateY(-2px);
+  border-color:var(--green);
+  box-shadow:0 0 18px rgba(25,255,155,.18);
 }
 
-.dot.active {
-    width: 18px;
-    border-radius: 10px;
-    background: #20a5ff;
+.icon{
+  font-size:34px;
+  filter:drop-shadow(0 0 8px rgba(25,255,155,.55));
 }
 
-/* SECTION */
+/* BUTTON */
 
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 18px 2px 10px;
+button{
+  border:1px solid rgba(25,255,155,.5);
+  background:
+    linear-gradient(
+      180deg,
+      #10e98b,
+      #00a963
+    );
+  color:#00130b;
+  font-weight:800;
+  border-radius:12px;
+  padding:12px 14px;
+  cursor:pointer;
 }
 
-.section-title h3 {
-    font-size: 16px;
+button.secondary{
+  background:#071a14;
+  color:var(--text);
+  border-color:rgba(25,255,155,.25);
 }
 
-.section-title span {
-    color: var(--muted);
-    font-size: 11px;
+button.danger{
+  background:#5b1427;
+  color:#fff;
+  border-color:#ff426d;
 }
 
-/* CATEGORY */
-
-.categories {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.category {
-    height: 125px;
-    border-radius: 18px;
-    padding: 14px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    transition: .2s;
-}
-
-.category:active {
-    transform: scale(.97);
-}
-
-.category .icon {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 44px;
-}
-
-.category h3 {
-    font-size: 14px;
-}
-
-.category p {
-    font-size: 10px;
-    color: #b7c6dd;
-    margin-top: 3px;
-}
-
-.pubg {
-    background: linear-gradient(135deg,#173c62,#0c1727);
-}
-
-.premium {
-    background: linear-gradient(135deg,#075a99,#11213b);
-}
-
-.stars {
-    background: linear-gradient(135deg,#482080,#14132d);
-}
-
-.gifts {
-    background: linear-gradient(135deg,#8a174c,#321329);
-}
-
-/* NEWS */
-
-.news {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.news::-webkit-scrollbar {
-    display: none;
-}
-
-.news-card {
-    min-width: 240px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 11px;
-    display: flex;
-    gap: 10px;
-}
-
-.news-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: #162d51;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-}
-
-.news-card b {
-    font-size: 11px;
-}
-
-.news-card p {
-    color: var(--muted);
-    font-size: 9px;
-    margin-top: 4px;
-}
-
-/* CARD */
-
-.card {
-    background: linear-gradient(145deg,#0d1b35,#081329);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 15px;
-    margin-bottom: 12px;
-}
-
-/* PAGE TITLE */
-
-.page-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0 16px;
-}
-
-.back {
-    width: 37px;
-    height: 37px;
-    border-radius: 12px;
-    background: var(--card2);
-    font-size: 19px;
-}
-
-.page-title h2 {
-    font-size: 19px;
+.full{
+  width:100%;
 }
 
 /* INPUT */
 
-.label {
-    display: block;
-    font-size: 12px;
-    color: #c3cee1;
-    margin: 13px 0 7px;
+.input{
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  border:1px solid rgba(25,255,155,.25);
+  background:#03110c;
+  color:white;
+  outline:none;
+  margin:7px 0;
 }
 
-.input-row {
-    display: flex;
-    gap: 7px;
-}
-
-input {
-    width: 100%;
-    height: 44px;
-    background: #08162d;
-    border: 1px solid #1d3b63;
-    border-radius: 12px;
-    outline: none;
-    color: white;
-    padding: 0 13px;
-}
-
-input:focus {
-    border-color: var(--blue);
-}
-
-.check-btn {
-    min-width: 100px;
-    background: linear-gradient(135deg,#0798ff,#006ce8);
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* USER */
-
-.user-result {
-    margin-top: 10px;
-    background: #0a213d;
-    border: 1px solid #194b78;
-    border-radius: 13px;
-    padding: 11px;
-    display: none;
-    align-items: center;
-    gap: 10px;
-}
-
-.avatar {
-    width: 39px;
-    height: 39px;
-    border-radius: 50%;
-    background: linear-gradient(135deg,#328fff,#7b4dff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.user-result b {
-    font-size: 12px;
-}
-
-.user-result p {
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 3px;
+.input:focus{
+  border-color:var(--green);
+  box-shadow:0 0 10px rgba(25,255,155,.12);
 }
 
 /* PRODUCTS */
 
-.product {
-    background: #0b1a32;
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 15px;
-    padding: 11px;
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    margin-bottom: 9px;
+.product{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:8px 0;
 }
 
-.product-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 12px;
-    background: #132b4d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
+.product .grow{
+  flex:1;
 }
 
-.product-info {
-    flex: 1;
+.product strong{
+  display:block;
 }
 
-.product-info b {
-    font-size: 13px;
+.price{
+  font-size:12px;
+  color:#78c8a8;
+  margin-top:3px;
 }
 
-.product-info p {
-    color: #16d99a;
-    font-size: 11px;
-    margin-top: 4px;
+.qty{
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
 
-.counter {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.counter button {
-    width: 27px;
-    height: 27px;
-    border-radius: 8px;
-    background: #193457;
-    font-size: 17px;
-}
-
-.counter span {
-    min-width: 16px;
-    text-align: center;
-    font-size: 12px;
-}
-
-/* ORDER */
-
-.total {
-    display: flex;
-    justify-content: space-between;
-    margin: 16px 2px 10px;
-}
-
-.total span {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.total b {
-    font-size: 18px;
-}
-
-.primary {
-    width: 100%;
-    height: 47px;
-    border-radius: 13px;
-    background: linear-gradient(135deg,#08a5ff,#006ef1);
-    font-weight: bold;
-    box-shadow: 0 8px 22px rgba(0,128,255,.2);
+.qty button{
+  width:30px;
+  height:30px;
+  padding:0;
+  border-radius:9px;
 }
 
 /* BALANCE */
 
-.balance {
-    background: linear-gradient(135deg,#075fb0,#4432a8);
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 15px;
-    position: relative;
-    overflow: hidden;
+.balance{
+  font-size:30px;
+  font-weight:900;
+  color:var(--green);
+  text-shadow:0 0 12px rgba(25,255,155,.45);
 }
 
-.balance:after {
-    content: "";
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.08);
-    right: -35px;
-    top: -50px;
+/* ROW */
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
-.balance small {
-    color: #bcd2ee;
+/* TABS */
+
+.tabs{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  margin-bottom:12px;
 }
 
-.balance h1 {
-    margin-top: 6px;
-    font-size: 28px;
-}
-
-/* AMOUNTS */
-
-.amounts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-.amount {
-    padding: 12px;
-    border-radius: 11px;
-    background: #102542;
-    border: 1px solid #1d4168;
-    font-size: 12px;
-}
-
-/* PAYMENT */
-
-.copy {
-    width: 100%;
-    margin-top: 8px;
-    padding: 11px;
-    border-radius: 11px;
-    background: #132c4c;
-    color: #51b6ff;
-    font-size: 11px;
-}
-
-.upload {
-    border: 1px dashed #2878b9;
-    border-radius: 14px;
-    padding: 22px 10px;
-    text-align: center;
-    color: var(--muted);
-    margin-top: 10px;
-    font-size: 11px;
-}
-
-.upload span {
-    display: block;
-    font-size: 28px;
-    margin-bottom: 7px;
+.tabs button{
+  white-space:nowrap;
+  padding:9px 12px;
 }
 
 /* HISTORY */
 
-.history {
-    display: flex;
-    gap: 11px;
-    align-items: center;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--border);
+.historyItem{
+  border-left:3px solid var(--green);
+  padding:12px;
+  margin:9px 0;
+  background:#061710;
+  border-radius:0 12px 12px 0;
 }
 
-.history:last-child {
-    border: none;
+.minus{
+  color:#ff718e;
 }
 
-.history-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: #153258;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.plus{
+  color:var(--green);
 }
 
-.history-info {
-    flex: 1;
-}
+/* NOTICE */
 
-.history-info b {
-    font-size: 12px;
-}
-
-.history-info p {
-    color: var(--muted);
-    font-size: 9px;
-    margin-top: 4px;
-}
-
-.plus {
-    color: #18d99a;
-    font-size: 12px;
-}
-
-.minus {
-    color: #ff7180;
-    font-size: 12px;
-}
-
-/* PROFILE */
-
-.profile-head {
-    text-align: center;
-    padding: 10px 0 20px;
-}
-
-.profile-avatar {
-    width: 72px;
-    height: 72px;
-    margin: auto;
-    border-radius: 50%;
-    background: linear-gradient(135deg,#008cff,#7048ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: bold;
-    box-shadow: 0 0 25px rgba(0,143,255,.3);
-}
-
-.profile-head h2 {
-    margin-top: 10px;
-    font-size: 17px;
-}
-
-.profile-head p {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 4px;
-}
-
-.profile-menu {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-.profile-item {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
-}
-
-.profile-item:last-child {
-    border: none;
-}
-
-.profile-item span:first-child {
-    font-size: 18px;
-}
-
-.profile-item span:nth-child(2) {
-    flex: 1;
+.notice{
+  padding:10px;
+  border:1px dashed rgba(25,255,155,.35);
+  border-radius:12px;
+  color:#91cdb5;
+  font-size:12px;
+  margin-top:10px;
 }
 
 /* ADMIN */
 
-.admin-stat {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+.admin{
+  border-color:#b65cff;
 }
 
-.stat {
-    background: #101f3a;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 13px;
+.adminTitle{
+  color:#d59aff;
 }
 
-.stat small {
-    color: var(--muted);
-    font-size: 9px;
+/* BOTTOM NAV */
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(480px,100%);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:30;
+
+  background:rgba(2,12,9,.94);
+  backdrop-filter:blur(16px);
+
+  border-top:1px solid rgba(25,255,155,.22);
+
+  padding:
+    8px
+    8px
+    calc(8px + env(safe-area-inset-bottom));
 }
 
-.stat b {
-    display: block;
-    font-size: 18px;
-    margin-top: 5px;
+nav button{
+  background:transparent;
+  border:0;
+  color:#6e9e8b;
+  padding:6px 2px;
+  font-size:11px;
 }
 
-.admin-item {
-    background: #0d1d35;
-    padding: 13px;
-    border-radius: 13px;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.admin-item .admin-text {
-    flex: 1;
-}
-
-.admin-item b {
-    font-size: 11px;
-}
-
-.admin-item p {
-    color: var(--muted);
-    font-size: 9px;
-    margin-top: 4px;
-}
-
-.edit {
-    background: #163d66;
-    border-radius: 8px;
-    padding: 7px 9px;
-    font-size: 11px;
-}
-
-/* NAVIGATION */
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    background: rgba(5,13,28,.94);
-    backdrop-filter: blur(18px);
-    border-top: 1px solid rgba(255,255,255,.08);
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    z-index: 100;
-    padding-bottom: env(safe-area-inset-bottom);
-}
-
-.nav-item {
-    background: transparent;
-    color: #71819a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 9px;
-}
-
-.nav-item .nav-icon {
-    font-size: 20px;
-}
-
-.nav-item.active {
-    color: #20a7ff;
-}
-
-/* TOAST */
-
-.toast {
-    position: fixed;
-    left: 20px;
-    right: 20px;
-    bottom: 82px;
-    background: #122441;
-    border: 1px solid #235180;
-    border-radius: 13px;
-    padding: 13px;
-    text-align: center;
-    font-size: 11px;
-    z-index: 200;
-    transform: translateY(120px);
-    opacity: 0;
-    transition: .3s;
-}
-
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
+nav button.active{
+  color:var(--green);
+  text-shadow:0 0 9px rgba(25,255,155,.7);
 }
 
 /* DESKTOP */
 
-@media(min-width:700px) {
-    body {
-        max-width: 520px;
-        margin: auto;
-    }
+@media(min-width:700px){
 
-    .bottom-nav {
-        max-width: 520px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+  .app{
+    max-width:900px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  nav{
+    max-width:900px;
+  }
+
+  .hero{
+    min-height:230px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<div class="app">
 
-<header class="header">
-    <div class="logo">
-        <div class="logo-circle">A5</div>
+<!-- HEADER -->
 
-        <div>
-            <div class="logo-title">A5 UC</div>
-            <div class="logo-sub">Telegram mini app</div>
-        </div>
+<header>
+  <div class="logo">
+
+    <div class="logoMark">
+      A5
     </div>
 
-    <button class="telegram-btn" onclick="showToast('Telegram profil')">
-        ✈
-    </button>
+    <div class="logoText">
+      A5 <span>UC</span>
+    </div>
+
+  </div>
 </header>
 
 
-<!-- ================================================= -->
-<!-- HOME -->
-<!-- ================================================= -->
+<!-- ================= HOME ================= -->
 
-<section id="home" class="page active">
+<main id="home" class="screen active">
 
-    <div class="slider">
+  <div class="hero" id="hero">
 
-        <div class="slide active">
-            <h2>PUBG MOBILE<br>YANGI X-SUIT</h2>
-            <p>Eng yangi yangiliklar va UC xaridlari</p>
-            <button onclick="openPage('pubg')">Batafsil →</button>
-            <div class="slide-art">🎮</div>
-        </div>
+    <h1 id="heroTitle">
+      TELEGRAM PREMIUM
+    </h1>
 
-        <div class="slide">
-            <h2>TELEGRAM<br>PREMIUM</h2>
-            <p>Premium va Stars xizmatlari</p>
-            <button onclick="openPage('telegram')">Ko‘rish →</button>
-            <div class="slide-art">⭐</div>
-        </div>
+    <p id="heroText">
+      Endi A5 UC orqali tez va qulay xarid qiling.
+    </p>
 
-        <div class="slide">
-            <h2>TELEGRAM<br>GIFTS</h2>
-            <p>Do‘stlaringizga sovg‘a yuboring</p>
-            <button onclick="openPage('gifts')">Ko‘rish →</button>
-            <div class="slide-art">🎁</div>
-        </div>
-
-        <div class="dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h3>Mahsulotlar</h3>
-        <span>Barchasi</span>
-    </div>
-
-    <div class="categories">
-
-        <div class="category pubg" onclick="openPage('pubg')">
-            <div class="icon">🎮</div>
-            <h3>PUBG MOBILE</h3>
-            <p>UC xarid qilish</p>
-        </div>
-
-        <div class="category premium" onclick="openPage('telegram')">
-            <div class="icon">⭐</div>
-            <h3>Telegram Premium</h3>
-            <p>Premium xizmat</p>
-        </div>
-
-        <div class="category stars" onclick="openPage('stars')">
-            <div class="icon">🌟</div>
-            <h3>Telegram Stars</h3>
-            <p>Stars sotib olish</p>
-        </div>
-
-        <div class="category gifts" onclick="openPage('gifts')">
-            <div class="icon">🎁</div>
-            <h3>Telegram Gifts</h3>
-            <p>Sovg‘alar</p>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h3>So‘nggi yangiliklar</h3>
-    </div>
-
-    <div class="news">
-
-        <div class="news-card">
-            <div class="news-icon">🎮</div>
-            <div>
-                <b>PUBG MOBILE yangi X-Suit</b>
-                <p>Yangi yangiliklar A5 UC'da</p>
-            </div>
-        </div>
-
-        <div class="news-card">
-            <div class="news-icon">⭐</div>
-            <div>
-                <b>Telegram Stars</b>
-                <p>Stars olish endi yanada oson</p>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- PUBG -->
-<!-- ================================================= -->
-
-<section id="pubg" class="page">
-
-    <div class="page-title">
-        <button class="back" onclick="openPage('home')">‹</button>
-        <h2>PUBG MOBILE</h2>
-    </div>
-
-    <div class="card">
-
-        <label class="label">PUBG MOBILE ID</label>
-
-        <div class="input-row">
-            <input id="pubgId" type="number" placeholder="123456789">
-            <button class="check-btn" onclick="checkPubg()">
-                Tekshirish
-            </button>
-        </div>
-
-        <div id="pubgUser" class="user-result">
-            <div class="avatar">A</div>
-            <div>
-                <b id="pubgName">ABROR A5</b>
-                <p>PUBG ID: <span id="pubgIdText"></span></p>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h3>UC paketlari</h3>
-    </div>
-
-
-    <div id="ucProducts">
-
-        <div class="product">
-            <div class="product-icon">💎</div>
-
-            <div class="product-info">
-                <b>60 UC</b>
-                <p>11 500 so‘m</p>
-            </div>
-
-            <div class="counter">
-                <button onclick="changeQty(0,-1)">−</button>
-                <span id="qty0">1</span>
-                <button onclick="changeQty(0,1)">+</button>
-            </div>
-        </div>
-
-
-        <div class="product">
-            <div class="product-icon">💎</div>
-
-            <div class="product-info">
-                <b>325 UC</b>
-                <p>57 000 so‘m</p>
-            </div>
-
-            <div class="counter">
-                <button onclick="changeQty(1,-1)">−</button>
-                <span id="qty1">1</span>
-                <button onclick="changeQty(1,1)">+</button>
-            </div>
-        </div>
-
-
-        <div class="product">
-            <div class="product-icon">💎</div>
-
-            <div class="product-info">
-                <b>660 UC</b>
-                <p>114 000 so‘m</p>
-            </div>
-
-            <div class="counter">
-                <button onclick="changeQty(2,-1)">−</button>
-                <span id="qty2">1</span>
-                <button onclick="changeQty(2,1)">+</button>
-            </div>
-        </div>
-
-
-        <div class="product">
-            <div class="product-icon">💎</div>
-
-            <div class="product-info">
-                <b>1800 UC</b>
-                <p>285 000 so‘m</p>
-            </div>
-
-            <div class="counter">
-                <button onclick="changeQty(3,-1)">−</button>
-                <span id="qty3">1</span>
-                <button onclick="changeQty(3,1)">+</button>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="total">
-        <span>Jami</span>
-        <b id="ucTotal">467 500 so‘m</b>
-    </div>
-
-    <button class="primary" onclick="order('PUBG UC')">
-        🛒 Buyurtma berish
+    <button onclick="openScreen('premium')">
+      Batafsil →
     </button>
 
-</section>
+  </div>
+
+  <div class="dots" id="dots"></div>
 
 
-<!-- ================================================= -->
-<!-- TELEGRAM PREMIUM -->
-<!-- ================================================= -->
+  <div class="sectionTitle">
+    Mahsulotlar
+  </div>
 
-<section id="telegram" class="page">
 
-    <div class="page-title">
-        <button class="back" onclick="openPage('home')">‹</button>
-        <h2>Telegram Premium</h2>
-    </div>
+  <div class="grid">
 
-    <div class="card">
-
-        <label class="label">Telegram username</label>
-
-        <div class="input-row">
-            <input id="usernamePremium" placeholder="@username">
-            <button class="check-btn" onclick="checkUsername('usernamePremium','premiumUser')">
-                Tekshirish
-            </button>
-        </div>
-
-        <div id="premiumUser" class="user-result">
-            <div class="avatar">A</div>
-            <div>
-                <b>@username</b>
-                <p>Foydalanuvchi topildi</p>
-            </div>
-        </div>
-
+    <div
+      class="card category"
+      onclick="openScreen('pubg')"
+    >
+      <div class="icon">◈</div>
+      <b>PUBG MOBILE</b>
+      <small>UC</small>
     </div>
 
 
-    <div class="section-title">
-        <h3>Premium paketlari</h3>
+    <div
+      class="card category"
+      onclick="openScreen('premium')"
+    >
+      <div class="icon">✦</div>
+      <b>Telegram Premium</b>
     </div>
 
 
-    <div class="product">
-        <div class="product-icon">⭐</div>
-
-        <div class="product-info">
-            <b>1 oy</b>
-            <p>39 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
+    <div
+      class="card category"
+      onclick="openScreen('stars')"
+    >
+      <div class="icon">★</div>
+      <b>Telegram Stars</b>
     </div>
 
 
-    <div class="product">
-        <div class="product-icon">⭐</div>
-
-        <div class="product-info">
-            <b>3 oy</b>
-            <p>109 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
+    <div
+      class="card category"
+      onclick="openScreen('gifts')"
+    >
+      <div class="icon">◆</div>
+      <b>Telegram Gifts</b>
     </div>
 
+  </div>
 
-    <div class="product">
-        <div class="product-icon">⭐</div>
+</main>
 
-        <div class="product-info">
-            <b>12 oy</b>
-            <p>349 000 so‘m</p>
-        </div>
 
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
+<!-- ================= PUBG ================= -->
 
+<section id="pubg" class="screen">
 
-    <button class="primary" onclick="order('Telegram Premium')">
-        🛒 Buyurtma berish
-    </button>
+  <div class="sectionTitle">
+    PUBG MOBILE
+  </div>
 
-</section>
 
+  <div class="card">
 
-<!-- ================================================= -->
-<!-- STARS -->
-<!-- ================================================= -->
+    <h2>
+      UC xarid qilish
+    </h2>
 
-<section id="stars" class="page">
 
-    <div class="page-title">
-        <button class="back" onclick="openPage('home')">‹</button>
-        <h2>Telegram Stars</h2>
-    </div>
-
-    <div class="card">
-
-        <label class="label">Telegram username</label>
-
-        <div class="input-row">
-            <input id="usernameStars" placeholder="@username">
-
-            <button class="check-btn"
-                onclick="checkUsername('usernameStars','starsUser')">
-                Tekshirish
-            </button>
-        </div>
-
-        <div id="starsUser" class="user-result">
-            <div class="avatar">A</div>
-            <div>
-                <b>@username</b>
-                <p>Foydalanuvchi topildi</p>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h3>Stars paketlari</h3>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🌟</div>
-
-        <div class="product-info">
-            <b>100 Stars</b>
-            <p>15 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🌟</div>
-
-        <div class="product-info">
-            <b>250 Stars</b>
-            <p>34 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🌟</div>
-
-        <div class="product-info">
-            <b>500 Stars</b>
-            <p>62 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🌟</div>
-
-        <div class="product-info">
-            <b>1000 Stars</b>
-            <p>115 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <button class="primary" onclick="order('Telegram Stars')">
-        🛒 Buyurtma berish
-    </button>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- GIFTS -->
-<!-- ================================================= -->
-
-<section id="gifts" class="page">
-
-    <div class="page-title">
-        <button class="back" onclick="openPage('home')">‹</button>
-        <h2>Telegram Gifts</h2>
-    </div>
-
-    <div class="card">
-
-        <label class="label">Telegram username</label>
-
-        <div class="input-row">
-            <input id="usernameGift" placeholder="@username">
-
-            <button class="check-btn"
-                onclick="checkUsername('usernameGift','giftUser')">
-                Tekshirish
-            </button>
-        </div>
-
-        <div id="giftUser" class="user-result">
-            <div class="avatar">A</div>
-            <div>
-                <b>@username</b>
-                <p>Foydalanuvchi topildi</p>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-        <h3>Giftlar</h3>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🎁</div>
-
-        <div class="product-info">
-            <b>Telegram Gift</b>
-            <p>25 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <div class="product">
-        <div class="product-icon">🎁</div>
-
-        <div class="product-info">
-            <b>Premium Gift</b>
-            <p>55 000 so‘m</p>
-        </div>
-
-        <div class="counter">
-            <button>−</button>
-            <span>1</span>
-            <button>+</button>
-        </div>
-    </div>
-
-
-    <button class="primary" onclick="order('Telegram Gift')">
-        🛒 Buyurtma berish
-    </button>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- BALANCE -->
-<!-- ================================================= -->
-
-<section id="balance" class="page">
-
-    <div class="page-title">
-        <h2>💳 Hisobni to‘ldirish</h2>
-    </div>
-
-
-    <div class="balance">
-        <small>Mening balansim</small>
-        <h1>0 so‘m</h1>
-    </div>
-
-
-    <div class="card">
-
-        <label class="label">Tezkor to‘ldirish</label>
-
-        <div class="amounts">
-            <button class="amount">50 000 so‘m</button>
-            <button class="amount">100 000 so‘m</button>
-            <button class="amount">200 000 so‘m</button>
-            <button class="amount">500 000 so‘m</button>
-        </div>
-
-
-        <label class="label">Yoki o‘zingiz summani kiriting</label>
-
-        <input type="number" placeholder="100 000">
-
-
-        <label class="label">To‘lov uchun karta</label>
-
-        <div class="card">
-            💳 <b>8600 **** **** 1234</b>
-            <p style="color:#8d9ab3;font-size:10px;margin-top:5px">
-                A5 UC
-            </p>
-        </div>
-
-        <button class="copy" onclick="copyCard()">
-            📋 Karta ma’lumotini nusxalash
-        </button>
-
-
-        <label class="label">To‘lov isboti</label>
-
-        <div class="upload" onclick="document.getElementById('receipt').click()">
-            <span>📸</span>
-            Skrinshot yuklang
-            <br>
-            <small>To‘lov amalga oshirilgandan so‘ng</small>
-        </div>
-
-        <input
-            id="receipt"
-            type="file"
-            accept="image/*"
-            style="display:none"
-            onchange="receiptSelected()"
-        >
-
-
-        <button
-            class="primary"
-            style="margin-top:12px"
-            onclick="submitPayment()">
-
-            💰 To‘lovni yuborish
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- HISTORY -->
-<!-- ================================================= -->
-
-<section id="history" class="page">
-
-    <div class="page-title">
-        <h2>📜 Tarix</h2>
-    </div>
-
-
-    <div class="card">
-
-        <div class="history">
-
-            <div class="history-icon">💰</div>
-
-            <div class="history-info">
-                <b>Hisobni to‘ldirish</b>
-                <p>14:32 · Ko‘rib chiqilmoqda</p>
-            </div>
-
-            <div class="plus">+100 000</div>
-
-        </div>
-
-
-        <div class="history">
-
-            <div class="history-icon">💎</div>
-
-            <div class="history-info">
-                <b>PUBG UC sotib olish</b>
-                <p>12:15 · Tasdiqlandi</p>
-            </div>
-
-            <div class="minus">−57 000</div>
-
-        </div>
-
-
-        <div class="history">
-
-            <div class="history-icon">🌟</div>
-
-            <div class="history-info">
-                <b>Telegram Stars</b>
-                <p>10:45 · Tasdiqlandi</p>
-            </div>
-
-            <div class="minus">−34 000</div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================================================= -->
-<!-- PROFILE -->
-<!-- ================================================= -->
-
-<section id="profile" class="page">
-
-    <div class="page-title">
-        <h2>👤 Profil</h2>
-    </div>
-
-
-    <div class="profile-head">
-
-        <div class="profile-avatar" id="profileAvatar">
-            A
-        </div>
-
-        <h2 id="profileName">A5 User</h2>
-
-        <p id="profileUsername">@username</p>
-
-    </div>
-
-
-    <div class="profile-menu">
-
-        <div class="profile-item">
-            <span>🛒</span>
-            <span>Mening buyurtmalarim</span>
-            <span>›</span>
-        </div>
-
-        <div class="profile-item">
-            <span>📜</span>
-            <span>To‘lovlar tarixi</span>
-            <span>›</span>
-        </div>
-
-        <div class="profile-item">
-            <span>💬</span>
-            <span>Qo‘llab-quvvatlash</span>
-            <span>›</span>
-        </div>
-
-        <div class="profile-item">
-            <span>⚙️</span>
-            <span>Sozlamalar</span>
-            <span>›</span>
-        </div>
-
-    </div>
+    <input
+      id="pubgId"
+      class="input"
+      placeholder="PUBG MOBILE ID"
+    >
 
 
     <button
-        class="primary"
-        style="margin-top:15px;background:linear-gradient(135deg,#7d48ff,#a03dff)"
-        onclick="openPage('admin')">
-
-        👨‍💼 Admin panel
-
+      class="full secondary"
+      onclick="checkId()"
+    >
+      Tekshirish
     </button>
+
+
+    <div
+      id="player"
+      class="notice"
+      style="display:none"
+    >
+      Player: ABROR A5 • ID tasdiqlandi
+    </div>
+
+  </div>
+
+
+  <div class="sectionTitle">
+    UC paketlari
+  </div>
+
+
+  <div id="ucList"></div>
+
+
+  <div class="card row">
+
+    <b>
+      Jami
+    </b>
+
+    <b id="ucTotal">
+      0 so'm
+    </b>
+
+  </div>
+
+
+  <button
+    class="full"
+    onclick="order('PUBG UC')"
+  >
+    Buyurtma berish
+  </button>
 
 </section>
 
 
-<!-- ================================================= -->
-<!-- ADMIN -->
-<!-- ================================================= -->
+<!-- ================= PREMIUM ================= -->
 
-<section id="admin" class="page">
+<section id="premium" class="screen">
 
-    <div class="page-title">
-
-        <button class="back" onclick="openPage('profile')">
-            ‹
-        </button>
-
-        <h2>👨‍💼 Admin Panel</h2>
-
-    </div>
+  <div class="sectionTitle">
+    Telegram Premium
+  </div>
 
 
-    <div class="admin-stat">
+  <div class="card">
 
-        <div class="stat">
-            <small>Foydalanuvchilar</small>
-            <b>1 248</b>
-        </div>
+    <h2>
+      Premium paketlari
+    </h2>
 
-        <div class="stat">
-            <small>Buyurtmalar</small>
-            <b>86</b>
-        </div>
+    <div id="premiumList"></div>
 
-        <div class="stat">
-            <small>Bugungi savdo</small>
-            <b>12.4M</b>
-        </div>
-
-        <div class="stat">
-            <small>Kutilayotgan</small>
-            <b>7</b>
-        </div>
-
-    </div>
+  </div>
 
 
-    <div class="section-title">
-        <h3>Boshqaruv</h3>
-    </div>
+  <button
+    class="full"
+    onclick="order('Telegram Premium')"
+  >
+    Buyurtma berish
+  </button>
+
+</section>
 
 
-    <div class="admin-item">
+<!-- ================= STARS ================= -->
 
-        <div>🖼️</div>
+<section id="stars" class="screen">
 
-        <div class="admin-text">
-            <b>Slider rasmlari</b>
-            <p>Asosiy sahifa reklamalarini boshqarish</p>
-        </div>
-
-        <button class="edit">O‘zgartirish</button>
-
-    </div>
+  <div class="sectionTitle">
+    Telegram Stars
+  </div>
 
 
-    <div class="admin-item">
+  <div class="card">
 
-        <div>💎</div>
-
-        <div class="admin-text">
-            <b>UC narxlari</b>
-            <p>PUBG UC paketlari va narxlari</p>
-        </div>
-
-        <button class="edit">Tahrirlash</button>
-
-    </div>
-
-
-    <div class="admin-item">
-
-        <div>⭐</div>
-
-        <div class="admin-text">
-            <b>Telegram narxlari</b>
-            <p>Premium va Stars narxlari</p>
-        </div>
-
-        <button class="edit">Tahrirlash</button>
-
-    </div>
-
-
-    <div class="admin-item">
-
-        <div>📦</div>
-
-        <div class="admin-text">
-            <b>Buyurtmalar</b>
-            <p>Barcha buyurtmalarni boshqarish</p>
-        </div>
-
-        <button class="edit">Ochish</button>
-
-    </div>
-
-
-    <div class="admin-item">
-
-        <div>💰</div>
-
-        <div class="admin-text">
-            <b>To‘lov so‘rovlari</b>
-            <p>7 ta yangi so‘rov</p>
-        </div>
-
-        <button class="edit">Ko‘rish</button>
-
-    </div>
+    <input
+      class="input"
+      placeholder="@username"
+    >
 
 
     <button
-        class="primary"
-        style="margin-top:15px;background:#ed3650"
-        onclick="openPage('home')">
-
-        Chiqish
-
+      class="full secondary"
+      onclick="toast('Username tekshirildi')"
+    >
+      Tekshirish
     </button>
+
+  </div>
+
+
+  <div id="starsList"></div>
+
+
+  <button
+    class="full"
+    onclick="order('Telegram Stars')"
+  >
+    Buyurtma berish
+  </button>
 
 </section>
 
 
-<!-- ================================================= -->
-<!-- BOTTOM NAV -->
-<!-- ================================================= -->
+<!-- ================= GIFTS ================= -->
 
-<nav class="bottom-nav">
+<section id="gifts" class="screen">
 
-    <button class="nav-item active"
-            onclick="openPage('home',this)">
+  <div class="sectionTitle">
+    Telegram Gifts
+  </div>
 
-        <span class="nav-icon">⌂</span>
-        <span>Bosh sahifa</span>
 
+  <div class="card">
+
+    <input
+      class="input"
+      placeholder="@username"
+    >
+
+
+    <button
+      class="full secondary"
+      onclick="toast('Username tekshirildi')"
+    >
+      Tekshirish
     </button>
 
+  </div>
 
-    <button class="nav-item"
-            onclick="openPage('balance',this)">
 
-        <span class="nav-icon">💳</span>
-        <span>Hisob</span>
+  <div id="giftList"></div>
 
+
+  <button
+    class="full"
+    onclick="order('Telegram Gift')"
+  >
+    Buyurtma berish
+  </button>
+
+</section>
+
+
+<!-- ================= BALANCE ================= -->
+
+<section id="balance" class="screen">
+
+  <div class="sectionTitle">
+    Hisob
+  </div>
+
+
+  <div class="card">
+
+    <small>
+      Joriy balans
+    </small>
+
+    <div
+      class="balance"
+      id="balance"
+    >
+      0 so'm
+    </div>
+
+  </div>
+
+
+  <div class="sectionTitle">
+    Hisobni to'ldirish
+  </div>
+
+
+  <div class="card">
+
+    <b>
+      HUMO
+    </b>
+
+
+    <p>
+      9860 1666 5584 6268
+    </p>
+
+
+    <b>
+      Q.ABROR
+    </b>
+
+
+    <button
+      class="full secondary"
+      onclick="copyCard()"
+    >
+      Karta raqamini nusxalash
     </button>
 
+  </div>
 
-    <button class="nav-item"
-            onclick="openPage('history',this)">
 
-        <span class="nav-icon">◷</span>
-        <span>Tarix</span>
+  <input
+    id="amount"
+    class="input"
+    type="number"
+    placeholder="To'lov summasi"
+  >
 
+
+  <div class="card">
+
+    <input
+      id="receipt"
+      type="file"
+      accept="image/*"
+    >
+
+
+    <div class="notice">
+
+      Chek rasmini yuklang.
+      Balans faqat admin tasdiqlagandan
+      keyin qo'shiladi.
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="full"
+    onclick="topup()"
+  >
+    So'rov yuborish
+  </button>
+
+</section>
+
+
+<!-- ================= HISTORY ================= -->
+
+<section id="history" class="screen">
+
+  <div class="sectionTitle">
+    Tarix
+  </div>
+
+
+  <div class="tabs">
+
+    <button>
+      Hammasi
     </button>
 
-
-    <button class="nav-item"
-            onclick="openPage('profile',this)">
-
-        <span class="nav-icon">●</span>
-        <span>Profil</span>
-
+    <button class="secondary">
+      Mahsulotlar
     </button>
+
+    <button class="secondary">
+      Pul
+    </button>
+
+  </div>
+
+
+  <div id="historyList">
+
+    <div class="notice">
+      Hozircha operatsiyalar yo'q.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="screen">
+
+  <div class="sectionTitle">
+    Profil
+  </div>
+
+
+  <div class="card">
+
+    <h2>
+      @A5_ABROR
+    </h2>
+
+
+    <div class="notice">
+      A5 UC foydalanuvchisi
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="row">
+
+      <b>
+        Til
+      </b>
+
+      <span>
+        UZB • RUS • ENG
+      </span>
+
+    </div>
+
+
+    <hr style="border-color:#123d2e">
+
+
+    <div class="row">
+
+      <b>
+        Reyting
+      </b>
+
+      <span>
+        🏆 Top xaridorlar
+      </span>
+
+    </div>
+
+
+    <hr style="border-color:#123d2e">
+
+
+    <div class="row">
+
+      <b>
+        Rejim
+      </b>
+
+      <button
+        class="secondary"
+        onclick="toast('Rejim o‘zgartirish keyingi versiyada')"
+      >
+        Kunduz / Tun
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <b>
+      Disclaimer / Foydalanish shartlari
+    </b>
+
+
+    <p class="price">
+
+      Xizmatlardan foydalanishdan oldin
+      buyurtma va to‘lov shartlarini tekshiring.
+
+    </p>
+
+  </div>
+
+
+  <button
+    class="full secondary"
+    onclick="toast('Support: @A5_ABROR')"
+  >
+    Qo‘llab-quvvatlash
+  </button>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section id="admin" class="screen">
+
+  <div class="sectionTitle adminTitle">
+    Admin Panel
+  </div>
+
+
+  <div class="card admin">
+
+    <div class="row">
+
+      <b>
+        Foydalanuvchilar
+      </b>
+
+      <b>
+        1248
+      </b>
+
+    </div>
+
+
+    <div class="row">
+
+      <b>
+        Buyurtmalar
+      </b>
+
+      <b>
+        86
+      </b>
+
+    </div>
+
+
+    <div class="row">
+
+      <b>
+        Bugungi savdo
+      </b>
+
+      <b>
+        12 450 000 so'm
+      </b>
+
+    </div>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div
+      class="card category"
+      onclick="toast('UC narxlarini boshqarish')"
+    >
+      UC narxlari
+    </div>
+
+
+    <div
+      class="card category"
+      onclick="toast('Bannerlarni boshqarish')"
+    >
+      Bannerlar
+    </div>
+
+
+    <div
+      class="card category"
+      onclick="toast('Adminlarni boshqarish')"
+    >
+      Adminlar
+    </div>
+
+
+    <div
+      class="card category"
+      onclick="toast('To‘lovlarni ko‘rish')"
+    >
+      To‘lovlar
+    </div>
+
+  </div>
+
+
+  <div class="notice">
+
+    Haqiqiy admin panel uchun backendda
+    Telegram ID va rol tekshiruvi shart.
+
+  </div>
+
+</section>
+
+</div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav>
+
+  <button
+    class="active"
+    data-screen="home"
+    onclick="openScreen('home')"
+  >
+    ⌂<br>
+    Bosh sahifa
+  </button>
+
+
+  <button
+    data-screen="balance"
+    onclick="openScreen('balance')"
+  >
+    ◉<br>
+    Hisob
+  </button>
+
+
+  <button
+    data-screen="history"
+    onclick="openScreen('history')"
+  >
+    ▣<br>
+    Tarix
+  </button>
+
+
+  <button
+    data-screen="profile"
+    onclick="openScreen('profile')"
+  >
+    ♙<br>
+    Profil
+  </button>
 
 </nav>
 
 
-<!-- TOAST -->
-
-<div id="toast" class="toast"></div>
-
-
 <script>
 
-/* TELEGRAM MINI APP */
+/* ================= PRODUCTS ================= */
 
-const tg = window.Telegram?.WebApp;
+const products = {
 
-if (tg) {
-    tg.ready();
-    tg.expand();
+  uc: [
+    ['60 UC',11500],
+    ['120 UC',23000],
+    ['180 UC',34500],
+    ['240 UC',46000],
+    ['325 UC',57500],
+    ['660 UC',81000],
+    ['8100 UC',575000]
+  ],
 
-    /*
-       Telegram user ma'lumotlari
-    */
+  premium: [
+    ['1 oy',45000],
+    ['1 yil',290000],
+    ['3 oy sovg‘a',160000],
+    ['6 oy sovg‘a',220000],
+    ['1 yil sovg‘a',350000]
+  ],
 
-    const user = tg.initDataUnsafe?.user;
+  stars: [
+    ['100 Stars',15000],
+    ['250 Stars',34000],
+    ['500 Stars',62000],
+    ['1000 Stars',115000],
+    ['2500 Stars',280000]
+  ],
 
-    if (user) {
+  gifts: [
+    ['Telegram Gift',25000],
+    ['Premium Gift',55000],
+    ['Unique Gift',99000],
+    ['Limited Gift',149000]
+  ]
 
-        const name =
-            user.first_name ||
-            "A5 User";
+};
 
-        const username =
-            user.username
-                ? "@" + user.username
-                : "Telegram foydalanuvchisi";
 
-        document.getElementById("profileName")
-            .textContent = name;
+/* ================= STATE ================= */
 
-        document.getElementById("profileUsername")
-            .textContent = username;
+const state = {
 
-        document.getElementById("profileAvatar")
-            .textContent =
-                name.charAt(0).toUpperCase();
-    }
+  uc:Array(products.uc.length).fill(0),
+
+  balance:0
+
+};
+
+
+/* ================= MONEY ================= */
+
+function money(n){
+
+  return n.toLocaleString('uz-UZ')
+    + ' so‘m';
+
 }
 
 
-/* PAGE NAVIGATION */
+/* ================= PRODUCT LIST ================= */
 
-function openPage(page, navButton = null) {
+function listProducts(id,arr,mode){
 
-    document.querySelectorAll(".page")
-        .forEach(p => p.classList.remove("active"));
+  const el =
+    document.getElementById(id);
 
-    const target =
-        document.getElementById(page);
+  el.innerHTML='';
 
-    if (target) {
-        target.classList.add("active");
-    }
 
-    if (navButton) {
+  arr.forEach((p,i)=>{
 
-        document.querySelectorAll(".nav-item")
-            .forEach(n => n.classList.remove("active"));
+    const d =
+      document.createElement('div');
 
-        navButton.classList.add("active");
-    }
+    d.className='card product';
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+
+    d.innerHTML = `
+
+      <div class="icon">
+
+        ${
+          mode==='uc'
+          ? '◈'
+          : mode==='stars'
+          ? '★'
+          : mode==='gifts'
+          ? '◆'
+          : '✦'
+        }
+
+      </div>
+
+
+      <div class="grow">
+
+        <strong>
+          ${p[0]}
+        </strong>
+
+        <div class="price">
+          ${money(p[1])}
+        </div>
+
+      </div>
+
+
+      <div class="qty">
+
+        <button
+          class="secondary"
+          onclick="change('${mode}',${i},-1)"
+        >
+          −
+        </button>
+
+
+        <b id="${mode}${i}">
+          0
+        </b>
+
+
+        <button
+          class="secondary"
+          onclick="change('${mode}',${i},1)"
+        >
+          +
+        </button>
+
+      </div>
+
+    `;
+
+
+    el.appendChild(d);
+
+  });
+
 }
 
 
-/* SLIDER */
+/* ================= QUANTITY ================= */
 
-let slideIndex = 0;
+function change(mode,i,delta){
 
-const slides =
-    document.querySelectorAll(".slide");
+  if(mode==='uc'){
 
-const dots =
-    document.querySelectorAll(".dot");
-
-function nextSlide() {
-
-    slides[slideIndex]
-        .classList.remove("active");
-
-    dots[slideIndex]
-        .classList.remove("active");
-
-    slideIndex++;
-
-    if (slideIndex >= slides.length) {
-        slideIndex = 0;
-    }
-
-    slides[slideIndex]
-        .classList.add("active");
-
-    dots[slideIndex]
-        .classList.add("active");
-}
-
-setInterval(nextSlide, 4000);
+    state.uc[i] =
+      Math.max(
+        0,
+        state.uc[i] + delta
+      );
 
 
-/* PUBG ID CHECK — DEMO */
+    document.getElementById(
+      mode+i
+    ).textContent =
+      state.uc[i];
 
-function checkPubg() {
-
-    const id =
-        document.getElementById("pubgId").value;
-
-    if (!id) {
-        showToast("PUBG ID kiriting");
-        return;
-    }
-
-    /*
-       Keyinchalik shu yerga
-       Render backend API ulanadi.
-    */
-
-    document.getElementById("pubgUser")
-        .style.display = "flex";
-
-    document.getElementById("pubgIdText")
-        .textContent = id;
-
-    document.getElementById("pubgName")
-        .textContent = "PUBG Player";
-
-    showToast("PUBG ID tekshirildi");
-}
-
-
-/* USERNAME CHECK — DEMO */
-
-function checkUsername(inputId, resultId) {
-
-    const username =
-        document.getElementById(inputId).value;
-
-    if (!username) {
-        showToast("Username kiriting");
-        return;
-    }
-
-    document.getElementById(resultId)
-        .style.display = "flex";
-
-    const result =
-        document.getElementById(resultId);
-
-    const name =
-        username.startsWith("@")
-            ? username
-            : "@" + username;
-
-    result.querySelector("b")
-        .textContent = name;
-
-    showToast("Username tekshirildi");
-}
-
-
-/* UC QUANTITY */
-
-const quantities = [1,1,1,1];
-
-const prices = [
-    11500,
-    57000,
-    114000,
-    285000
-];
-
-function changeQty(index, amount) {
-
-    quantities[index] += amount;
-
-    if (quantities[index] < 1) {
-        quantities[index] = 1;
-    }
-
-    document.getElementById("qty" + index)
-        .textContent = quantities[index];
 
     updateTotal();
+
+  }
+
 }
 
 
-function updateTotal() {
+/* ================= TOTAL ================= */
 
-    let total = 0;
+function updateTotal(){
 
-    for (let i = 0; i < quantities.length; i++) {
-        total += quantities[i] * prices[i];
-    }
+  let total=0;
 
-    document.getElementById("ucTotal")
-        .textContent =
-        total.toLocaleString("uz-UZ") +
-        " so‘m";
+
+  state.uc.forEach((q,i)=>{
+
+    total +=
+      q * products.uc[i][1];
+
+  });
+
+
+  document.getElementById(
+    'ucTotal'
+  ).textContent =
+    money(total);
+
 }
 
 
-/* ORDER */
+/* ================= PUBG ID ================= */
 
-function order(product) {
+function checkId(){
 
-    showToast(
-        product +
-        " buyurtmasi tayyorlanmoqda..."
+  const id =
+    document.getElementById(
+      'pubgId'
+    ).value.trim();
+
+
+  if(id){
+
+    document.getElementById(
+      'player'
+    ).style.display='block';
+
+
+    toast(
+      'ID tekshirildi'
     );
 
-    /*
-       Keyinchalik:
+  }else{
 
-       Telegram WebApp -> Render API
-       -> Database
-       -> Admin bot
-
-       ulanadi.
-    */
-}
-
-
-/* PAYMENT */
-
-function receiptSelected() {
-
-    const file =
-        document.getElementById("receipt").files[0];
-
-    if (file) {
-        showToast("To‘lov isboti tanlandi");
-    }
-}
-
-
-function submitPayment() {
-
-    const file =
-        document.getElementById("receipt").files[0];
-
-    if (!file) {
-        showToast("Avval to‘lov isbotini yuklang");
-        return;
-    }
-
-    showToast(
-        "So‘rovingiz ko‘rib chiqilmoqda"
+    toast(
+      'PUBG ID kiriting'
     );
 
-    /*
-       Keyinchalik rasm Render backend'ga
-       yuboriladi va admin botga keladi.
-    */
+  }
+
 }
 
 
-/* COPY CARD */
+/* ================= NAVIGATION ================= */
 
-function copyCard() {
+function openScreen(id){
 
-    navigator.clipboard.writeText(
-        "8600XXXXXXXX1234"
+  document
+    .querySelectorAll('.screen')
+    .forEach(x =>
+      x.classList.remove('active')
     );
 
-    showToast(
-        "Karta ma'lumoti nusxalandi"
+
+  document
+    .getElementById(id)
+    .classList.add('active');
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+
+  document
+    .querySelectorAll('nav button')
+    .forEach(x =>
+      x.classList.toggle(
+        'active',
+        x.dataset.screen===id
+      )
     );
+
 }
 
 
-/* TOAST */
+/* ================= ORDER ================= */
 
-function showToast(message) {
+function order(name){
 
-    const toast =
-        document.getElementById("toast");
+  toast(
+    name +
+    ' buyurtmasi qabul qilindi — demo rejim'
+  );
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
 }
+
+
+/* ================= TOPUP ================= */
+
+function topup(){
+
+  const a =
+    Number(
+      document.getElementById(
+        'amount'
+      ).value
+    );
+
+
+  const receipt =
+    document.getElementById(
+      'receipt'
+    );
+
+
+  if(
+    !a ||
+    !receipt.files.length
+  ){
+
+    toast(
+      'Summa va chek rasmini kiriting'
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    'Ariza yuborildi. Admin tasdiqlashini kuting'
+  );
+
+}
+
+
+/* ================= COPY CARD ================= */
+
+function copyCard(){
+
+  navigator
+    .clipboard
+    ?.writeText(
+      '9860166655846268'
+    );
+
+
+  toast(
+    'Karta raqami nusxalandi'
+  );
+
+}
+
+
+/* ================= TOAST ================= */
+
+function toast(msg){
+
+  const t =
+    document.createElement(
+      'div'
+    );
+
+
+  t.textContent=msg;
+
+
+  t.style = `
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:92px;
+
+    transform:translateX(-50%);
+
+    background:#061c14;
+
+    border:1px solid #19ff9b;
+
+    color:#eafff5;
+
+    padding:12px 16px;
+
+    border-radius:12px;
+
+    z-index:99;
+
+    box-shadow:
+      0 0 20px #19ff9b55;
+
+    max-width:90%;
+
+    text-align:center;
+
+  `;
+
+
+  document.body.appendChild(t);
+
+
+  setTimeout(
+    ()=>t.remove(),
+    2200
+  );
+
+}
+
+
+/* ================= BANNERS ================= */
+
+const banners = [
+
+  [
+    'TELEGRAM PREMIUM',
+    'Endi A5 UC orqali tez va qulay xarid qiling.'
+  ],
+
+  [
+    'PUBG MOBILE',
+    'Yangi UC paketlari va aksiyalar.'
+  ],
+
+  [
+    'TELEGRAM STARS',
+    'Stars va Gifts xizmatlari.'
+  ]
+
+];
+
+
+let bi=0;
+
+
+function rotate(){
+
+  bi =
+    (bi+1)
+    % banners.length;
+
+
+  document.getElementById(
+    'heroTitle'
+  ).textContent =
+    banners[bi][0];
+
+
+  document.getElementById(
+    'heroText'
+  ).textContent =
+    banners[bi][1];
+
+
+  document.getElementById(
+    'dots'
+  ).innerHTML =
+
+    banners
+      .map(
+        (_,i)=>
+          `<span class="dot ${
+            i===bi ? 'on' : ''
+          }"></span>`
+      )
+      .join('');
+
+}
+
+
+/* ================= INIT ================= */
+
+listProducts(
+  'ucList',
+  products.uc,
+  'uc'
+);
+
+
+listProducts(
+  'premiumList',
+  products.premium,
+  'premium'
+);
+
+
+listProducts(
+  'starsList',
+  products.stars,
+  'stars'
+);
+
+
+listProducts(
+  'giftList',
+  products.gifts,
+  'gifts'
+);
+
+
+rotate();
+
+
+setInterval(
+  rotate,
+  4500
+);
 
 </script>
 
